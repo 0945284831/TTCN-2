@@ -1,0 +1,69 @@
+
+<div class='card'>
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+          <span>{{pageTitle}}</span>
+          <button class="btn btn-primary" [routerLink]="['/admin/products/add']">Thêm mới sản phẩm</button>
+        </div>
+      </div>
+    <div class='card-body'>
+      <div class='row'>
+        <div class='col-md-2'>Tìm tên sản phẩm:</div>
+        <div class='col-md-4'>
+          <input type='text'
+                 [(ngModel)]='listFilter' />
+        </div>
+      </div>
+      <div class='row'
+           *ngIf='listFilter'>
+        <div class='col-md-6'>
+          <h4>Tìm theo tên sản phẩm: {{listFilter}}</h4>
+        </div>
+      </div>
+      <div class='table-responsive text-center'>
+        <table class='table'
+               *ngIf='products.length'>
+          <thead>
+            <tr >
+              <th>ảnh </th>
+              <th>Tên Sản phẩm</th>
+              <th>Mô tả</th>
+              <th>Số lượng</th>
+              <th>Giá</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor='let product of filteredProducts; let i = index'
+            style="height: 150px;">
+              <td>
+                <img 
+                     [src]="'http://localhost:3000' + product.productImage[0]"
+                     [title]='product.productName'
+                     style="width: 181px; height:150px; "
+                     >
+              </td>
+              <td class=" align-items-center">
+                <p [routerLink]="['/products', product]">
+                  {{ product.productName }}
+                </p>
+              </td>
+              <td>
+                <p-button (click)="showDialog(i)" label="Mô tả" styleClass="p-button-warning"></p-button>
+                <p-dialog header="Header" [(visible)]="dialogVisibilities[i]" [style]="{ width: '50vw' }">
+                    <p>
+                    {{ product.productDescription }}
+                    </p>
+                </p-dialog> 
+             </td>
+              <td>{{ product.productQuantity }}</td>
+              <td>{{ product.productPrice | number:'1.0-2' }} VND</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf='errorMessage'
+       class='alert alert-danger'>
+    Error: {{ errorMessage }}
+  </div>

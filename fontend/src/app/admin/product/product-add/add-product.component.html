@@ -1,0 +1,104 @@
+<!-- add-product.component.html -->
+<div class="container mt-4">
+  <h2>Thêm Sản Phẩm Mới</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="productName" class="form-label">Tên Sản Phẩm:</label>
+      <input 
+      type="text" 
+      class="form-control" 
+      id="productName" 
+      name="productName" 
+      formControlName="productName" 
+      required>
+    </div>
+    <div class="mb-3">
+      <label for="mainCategory" class="form-label">Danh Mục Chính:</label>
+      <select 
+          class="form-control" 
+          id="mainCategory" 
+          name="mainCategory" 
+          formControlName="mainCategoryId" 
+          required
+          (change)="onMainCategoryChange()">
+        <option 
+          *ngFor="let mainCategory of mainCategories" 
+          [value]="mainCategory.mainCategoryId">
+            {{ mainCategory.mainCategoryName }}
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="subCategory" class="form-label">Danh Mục Phụ:</label>
+      <select 
+        class="form-control" 
+        id="subCategory" 
+        name="subCategory" 
+        formControlName="subCategoryId" 
+        required>
+        <option 
+        *ngFor="let subCategory of subCategories" 
+        [value]="subCategory.subCategoryId">
+          {{ subCategory.subCategoryName }}
+        </option>
+      </select>
+    </div>
+    
+    
+    
+    
+    <div class="mb-3">
+      <label for="productDescription" class="form-label">Mô Tả:</label>
+      <textarea 
+      class="form-control" 
+      id="productDescription" 
+      name="productDescription" 
+      formControlName="productDescription"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="productPrice" class="form-label">Giá:</label>
+      <input 
+      type="number" 
+      class="form-control" 
+      id="productPrice" 
+      name="productPrice" 
+      formControlName="productPrice">
+    </div>
+    <div class="mb-3">
+      <label for="productQuantity" class="form-label">Số Lượng:</label>
+      <input 
+      type="number" 
+      class="form-control" 
+      id="productQuantity" 
+      name="productQuantity" 
+      formControlName="productQuantity">
+    </div>
+    <div class="row mb-3">
+      <label for="productImage" class="form-label col-sm-2" style="width: 140px;">Ảnh Sản Phẩm:</label>
+      <div class="col-sm-10">
+        <input type="file" #fileInput style="display: none" multiple (change)="onFileSelect($event)" name="productImages" />
+        <button type="button" class="btn btn-primary" (click)="fileInput.click()">
+          <i class="pi pi-upload"></i> Thêm ảnh
+        </button>
+      </div>
+    </div>
+
+    <div class="list-group mt-3">
+      <ul *ngIf="imageDataList.length > 0" class="list-group-item d-flex flex-row flex-wrap">
+        <div *ngFor="let imageData of imageDataList" class="pr-2">
+          <p-image [src]="imageData" alt="Image" width="250" [preview]="true"></p-image>
+        </div>
+        <div class="w-100"></div>
+        <div class="mt-2">
+          <button type="button" class="btn btn-danger" (click)="clearImages()">Clear All</button>
+        </div>
+      </ul>
+    </div>
+
+    <div class="d-flex align-items-center mt-5">
+      <button class="btn btn-primary mr-3" [routerLink]="['/admin/products']">Quay lại</button>
+      <button type="submit" class="btn btn-success" [disabled]="!form.valid">Thêm Sản Phẩm</button>
+    </div>
+    
+  </form>
+</div>

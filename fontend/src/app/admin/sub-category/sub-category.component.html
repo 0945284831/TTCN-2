@@ -1,0 +1,87 @@
+<div class="ml-4">
+  <header class="d-flex flex-wrap justify-content-center py-1 mb-4 border-bottom">
+    <p class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <span class="fs-5">Danh Mục Phụ</span>
+    </p>
+  </header>
+<form  [formGroup]="subCategoryForm!">
+<div class="mb-9">
+  <div class="row">
+    <div class="col-md-2">
+      <label for="subCategoryName" class="form-label">Tên Danh Mục Phụ:</label>
+    </div>
+    <div class="col-md-3">
+      <input id="subCategoryName" type="text" [(ngModel)]="subCategoryName" class="form-control" required />
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-2">
+      <label for="mainCategory" class="form-label">Chọn Danh Mục Chính:</label>
+    </div>
+    <div class="col-md-3">
+      <!-- Fix the ngModel binding and options in the select element -->
+      <select id="mainCategory" [(ngModel)]="mainCategoryId" class="form-select" required>
+        <option *ngFor="let mainCategory of mainCategories" [value]="mainCategory.mainCategoryId">
+          {{ mainCategory.mainCategoryName }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+      <button (click)="addSubCategory()" class="btn btn-success" [disabled]="!subCategoryForm.valid">Thêm Danh Mục Phụ</button>
+    </div>
+  </div>
+</div>
+</form>
+
+
+
+<div class="card mt-3">
+  <div class="row mt-3">
+  <div class="col-md-2 text-center">
+    <label for="subCategoryName" class="form-label">Lọc bằng danh mục chính:</label>
+  </div>
+ <div class="col-md-3 mb-3">
+    <select class="form-select" [(ngModel)]="mainCategoryFilter" (change)="applyMainCategoryFilter()">
+      <option value="">Tất cả danh mục</option>
+      <option *ngFor="let category of mainCategories" [value]="category.mainCategoryId">
+        {{ category.mainCategoryName }}
+      </option>
+    </select>
+  </div>
+</div>
+        <p-table 
+        [value]="subCategories" 
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rows]="5"
+        [paginator]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>STT</th>
+              <th>Tên danh Mục Phụ</th>
+              <th>Tên danh Mục Chính</th>
+              <th class="text-center">Trạng Thái</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-subCategory let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ rowIndex + 1 }}</td>
+              <td>{{ subCategory.subCategoryName }}</td>
+              <td>{{ subCategory.mainCategoryName }}</td>
+              <td class="text-center">
+                <button pButton pRipple icon="pi pi-trash" (click)="confirmDelete(subCategory._id)" class="btn btn-danger">
+                  Xóa
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+  <p-confirmDialog></p-confirmDialog>
+</div>
+
+
+</div>

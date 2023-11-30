@@ -1,0 +1,57 @@
+<!-- main-category.component.html -->
+<div class="ml-4">
+    <header class="d-flex flex-wrap justify-content-center py-1 mb-4 border-bottom">
+        <p class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+          <span class="fs-5">Danh Mục Chính</span>
+        </p>
+      </header>
+    <!-- Phần thêm -->
+    <div class= "mb-4">
+        <div class="row">
+          <div class="col-md-2">
+            <label for="newMainCategory" class="form-label">Thêm mới danh mục chính: <span style="color: red;">*</span></label>
+          </div>
+          <div class="col-md-3">
+            <input 
+              id="newMainCategory" 
+              type="text" 
+              [(ngModel)]="newMainCategoryName" 
+              class="form-control" 
+              (keyup.enter)="addMainCategory()"/>
+          </div>          
+          <div class="col-md-1">
+            <button 
+              (click)="addMainCategory()" 
+              class="btn btn-success"
+              [disabled]="!newMainCategoryName">Thêm</button>
+          </div>
+        </div>
+      </div>
+    <div class="card">
+        <p-table 
+            [value]="mainCategories" 
+            [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>STT</th>
+                    <th>Tên danh Mục Chính</th>
+                    <th></th>
+                    <th class="text-center">Trạng Thái</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-mainCategory let-rowIndex="rowIndex">
+                <tr class="hi">
+                    <td>{{ rowIndex + 1 }}</td>
+                    <td>{{ mainCategory.mainCategoryName }}</td>
+                    <td></td>
+                    <td class="text-center">
+                        <button pButton pRipple icon="pi pi-trash" 
+                                (click)="confirmDelete(mainCategory.mainCategoryId)" 
+                                class="btn btn-danger">Xóa</button>
+                      </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <p-confirmDialog></p-confirmDialog>
+</div>

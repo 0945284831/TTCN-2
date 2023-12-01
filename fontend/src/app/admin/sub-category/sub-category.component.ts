@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SubCategoryService, SubCategory } from './sub-category.service';
-import { MainCategoryService, MainCategory } from '../main-category/main-category.service';
+import { SubCategoryService, SubCategory } from '../../../assets/service/sub-category.service';
+import { MainCategoryService, MainCategory } from '../../../assets/service/main-category.service';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';

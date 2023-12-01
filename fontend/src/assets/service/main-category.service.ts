@@ -2,15 +2,15 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { SubCategory } from '../sub-category/sub-category.service';
-import { map } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { SubCategory } from './sub-category.service';
 
-// Add the 'export' keyword to make MainCategory accessible outside of this file
 export interface MainCategory {
   mainCategoryId: string;
   mainCategoryName: string;
   subCategoryIds: string[];
+  subCategories?: SubCategory[];
 }
 
 @Injectable({
@@ -25,8 +25,24 @@ export class MainCategoryService {
     const url = `${this.apiUrl}/${mainCategoryId}`;
     return this.http.get<MainCategory>(url);
   }
+
   getMainCategories(): Observable<MainCategory[]> {
-    return this.http.get<MainCategory[]>(this.apiUrl);
+    return this.http.get<MainCategory[]>(this.apiUrl).pipe(
+      switchMap(mainCategories => {
+        const observables: Observable<SubCategory[]>[] = mainCategories.map(mainCategory =>
+          this.getSubCategoriesByMainCategory(mainCategory.mainCategoryId)
+        );
+        return forkJoin(observables).pipe(
+          map(subCategoriesArrays => {
+            // Gán mỗi mainCategory.subCategories bằng subCategories tương ứng từ API
+            mainCategories.forEach((mainCategory, index) => {
+              mainCategory.subCategories = subCategoriesArrays[index];
+            });
+            return mainCategories;
+          })
+        );
+      })
+    );
   }
 
   addMainCategory(mainCategoryName: string): Observable<MainCategory> {
@@ -42,6 +58,7 @@ export class MainCategoryService {
     const url = `${this.apiUrl}/${mainCategoryId}`;
     return this.http.delete(url);
   }
+
   getSubCategoriesByMainCategory(mainCategoryId: string): Observable<SubCategory[]> {
     const url = `${this.apiUrl}/${mainCategoryId}/subcategories`;
     return this.http.get<SubCategory[]>(url);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService, Product } from '../product.service';
-import { MainCategoryService, MainCategory } from '../../main-category/main-category.service';
-import { SubCategoryService, SubCategory } from '../../sub-category/sub-category.service';
+import { ProductService, Product } from '../../../../assets/service/product.service';
+import { MainCategoryService, MainCategory } from '../../../../assets/service/main-category.service';
+import { SubCategoryService, SubCategory } from '../../../../assets/service/sub-category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Location } from '@angular/common';

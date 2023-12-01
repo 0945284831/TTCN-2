@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user.component';
+import { BrowserModule } from '@angular/platform-browser'
+import { GioithieuComponent } from './gioithieu/gioithieu.component'
+import { LienheComponent } from './lienhe/lienhe.component'
 const userRoutes: Routes = [
   {
-    path: '',
+    path: 'user',
     component: UserComponent,
     children: [
-      // { path: 'main-category', component: MainCategoryComponent },
-      // { path: 'sub-category', component: SubCategoryComponent },
-      // { path: 'products', component: ProductComponent }
+      { path: 'gioithieu', component: GioithieuComponent },
+      { path: 'lienhe', component: LienheComponent },
     ]
   }
 ];
 @NgModule({
   
   imports: [
+    BrowserModule,
     RouterModule.forChild(userRoutes),
   ],
   exports: [RouterModule]

@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
 import { TableModule } from 'primeng/table';
 import { AdminRoutingModule } from './admin/admin-routing.module'
+import { UserRoutingModule } from './user/user-routing.module'
 
 @NgModule({
   
@@ -21,6 +22,8 @@ import { AdminRoutingModule } from './admin/admin-routing.module'
     NgbModule, 
     TableModule,
     AdminRoutingModule,
+    UserRoutingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

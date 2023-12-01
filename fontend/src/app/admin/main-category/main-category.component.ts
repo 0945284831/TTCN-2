@@ -1,6 +1,6 @@
 // main-category.component.ts
 import { Component, OnInit } from '@angular/core';
-import { MainCategory, MainCategoryService } from './main-category.service';
+import { MainCategory, MainCategoryService } from '../../../assets/service/main-category.service';
 import { ConfirmationService } from 'primeng/api';
 
 

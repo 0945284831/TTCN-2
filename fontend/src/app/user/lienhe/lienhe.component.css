@@ -1,3 +1,58 @@
-.category-item img{
-    border-radius: 50%;
+.header{
+    background: url('../../../assets/img/nền.png') center/cover;
+    text-align: center;
+}
+.container{
+    max-width:1000px !important;
+}
+.category-item {
+    
+    max-width: 174px; 
+  }
+
+.custom-img img{
+    border-radius: 50% !important;
+    max-width: 174px; 
+  }
+a{
+  text-decoration: none;
+  color:#000;  
+}
+.category-item:hover .custom-img img {
+  transform: translateY(-15px);
+} 
+.category-item:hover p {
+  color: #CC7F45; 
+}  
+
+.lienhe .container {
+  max-width: 1550px !important;
+}
+
+.underline-text span {
+  border-bottom: 3px solid #CC7F45;   
+  padding-bottom: 5px;
+  border-radius: 4px;
+}
+
+.custom-input, .custom-textarea {
+  width: 100% !important;
+  margin-bottom: 15px; /* Khoảng cách giữa các input */
+}
+form .form-control {
+  width: 100%;
+}
+
+#pagelogin button{
+  background-color: #CC7F45;
+  color: aliceblue;
+  border-radius: 8px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+#pagelogin button:hover {
+  background-color: green !important;
 }

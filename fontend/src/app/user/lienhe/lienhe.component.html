@@ -1,67 +1,142 @@
-<div class="container">
-    <div class="category-item">
-      <a href="#">
-        <div class="category-image">
-          <img src="../../../assets/img/danhmuc_1.png" alt="Tô-Chén-Dĩa">
-        </div>
-        <div class="category-title">
-          <h3>Tô-Chén-Dĩa</h3>
-        </div>
-      </a>
+<div class="header">
+    <div class="container" style="padding-top: 50px; text-align: center;">
+        <nav aria-label="breadcrumb" style="display: inline-block;">
+            <h2 style=" color: #CC7F45;">Liên Hệ</h2>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+              <li class="breadcrumb-item" style=" color: #CC7F45;" >Liên Hệ</li>
+            </ol>
+        </nav>
+        
+        <p-carousel [value]="subCategories" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+            <ng-template let-subCategories pTemplate="item">
+                <a class="m-2 text-center py-3 px-5 category-item">
+                    <div class="mb-1 custom-img">
+                        <img class="" [src]="subCategories.imageUrl" [alt]="subCategories.title">
+                    </div>
+                    <div>
+                        <p class="mb-1 mt-3">{{ subCategories.title }}</p>
+                    </div>
+                </a>
+            </ng-template>
+        </p-carousel>
     </div>
+</div>
+
+
+<div class="lienhe mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="contact">
+                    <h4 class="underline-text">
+                        <span>Cửa hàng</span> Sudes Gốm Sứ
+                    </h4>
+                    <div class="info-contact mt-4">
+                        <div class="group-address">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <li class="list-group-item">
+                                        <div class="info" style="display: flex; align-items: center;">
+                                            <div style="border: 1px solid #CC7F45; border-radius: 50%; color: #CC7F45; width: fit-content; padding: 5px; display: flex; align-items: center; justify-content: center;">
+                                                <i class="pi pi-map-marker" style="font-size: 1rem; padding: 5px;"></i>
+                                            </div>
+                                            <div style="margin-left: 10px;">
+                                                <b>Địa chỉ</b><br>
+                                                P316, Tầng 3 Nhà Hành chính VNUA
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+                                <div class="col-md-6">
+                                    <li class="list-group-item">
+                                        <div class="info" style="display: flex; align-items: center;">
+                                            <div style="border: 1px solid #CC7F45; border-radius: 50%; color: #CC7F45; width: fit-content; padding: 5px; display: flex; align-items: center; justify-content: center;">
+                                                <i class="pi pi-map-marker" style="font-size: 1rem; padding: 5px;"></i>
+                                            </div>
+                                            <div style="margin-left: 10px;">
+                                                <b>Thời gian làm việc</b><br>
+                                                8h - 22h<br>Từ thứ 2 đến chủ nhật
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>   
+                            </div>
+                                
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <li class="list-group-item">
+                                        <div class="info" style="display: flex; align-items: center;">
+                                            <div style="border: 1px solid #CC7F45; border-radius: 50%; color: #CC7F45; width: fit-content; padding: 5px; display: flex; align-items: center; justify-content: center;">
+                                                <i class="pi pi-map-marker" style="font-size: 1rem; padding: 5px;"></i>
+                                            </div>
+                                            <div style="margin-left: 10px;">
+                                                <b>Hotline</b><br>
+                                                0945284831
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <li class="list-group-item">
+                                        <div class="info" style="display: flex; align-items: center;">
+                                            <div style="border: 1px solid #CC7F45; border-radius: 50%; color: #CC7F45; width: fit-content; padding: 5px; display: flex; align-items: center; justify-content: center;">
+                                                <i class="pi pi-map-marker" style="font-size: 1rem; padding: 5px;"></i>
+                                            </div>
+                                            <div style="margin-left: 10px;">
+                                                <b>Email</b><br>
+                                                toan.qt&#64;izota.vn
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+                        </div>
+                </div>
+                <div class="form-contact mt-3">
+                    <h4 class="underline-text">
+                        <span>Liên hệ</span> với chúng tôi
+                    </h4>
+                    <div class="mt-4">
+                        <span class="content-form">
+                            Nếu bạn có thắc mắc gì, có thể gửi yêu cầu cho chúng tôi, và chúng tôi sẽ liên lạc lại với bạn sớm nhất có thể .
+                        </span>
+                    </div>  
+                    
+                    <div id="pagelogin">
+                        <form (ngSubmit)="submitForm()">
+                            <div class="custom-input">
+                            <input placeholder="Họ và tên" type="text" class="form-control form-control-lg" required [(ngModel)]="formData.name" name="name">
+                            </div>
+                            <div class="custom-input">
+                            <input placeholder="Email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required [(ngModel)]="formData.email" name="email"class="form-control form-control-lg">
+                            </div>
+                            <div class="custom-input">
+                            <input type="number" placeholder="Điện thoại*" [(ngModel)]="formData.phone" name="phone" class="form-control form-control-lg" required>
+                            </div>  
+                            <div class="custom-textarea">
+                            <textarea placeholder="Nội dung" [(ngModel)]="formData.body" name="body" class="form-control content-area form-control-lg" rows="5" required></textarea>
+                            </div>
+                            <button type="submit">Gửi thông tin</button>
+                        </form>
   
-    <div class="category-item">
-      <a href="#">
-        <div class="category-image">
-          <img src="../../../assets/img/danhmuc_2.png" alt="Phụ kiện trà - cà phê">
+                          
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="category-title">
-          <h3>Phụ kiện trà - cà phê</h3>
-        </div>
-      </a>
     </div>
+            <div class="col-lg-6 col-12">
+                <div id="contact_map" class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1566.0397321420398!2d105.93071276545652!3d21.005012647535754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135a94c1f882977%3A0x6d016e6656923f46!2zSOG7jWMgdmnhu4duIE7DtG5nIE5naGnhu4dwIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1701696032400!5m2!1svi!2s" width="100%" height="700px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+    </div>
+    </div>
+</div>
+
+
   
-    <div class="category-item">
-      <a href="#">
-        <div class="category-image">
-          <img src="../../../assets/img/danhmuc_3.png" alt="Ly sứ dưỡng sinh">
-        </div>
-        <div class="category-title">
-          <h3>Ly sứ dưỡng sinh</h3>
-        </div>
-      </a>
-    </div>
-  
-    <div class="category-item">
-      <a href="#">
-        <div class="category-image">
-          <img src="../../../assets/img/danhmuc_4.png" alt="Túi vải canvas">
-        </div>
-        <div class="category-title">
-          <h3>Túi vải canvas</h3>
-        </div>
-      </a>
-    </div>
-  
-    <div class="category-item">
-      <a href="#">
-        <div class="category-image">
-          <img src="../../../assets/img/danhmuc_5.png" alt="Hộp sứ dưỡng sinh">
-        </div>
-        <div class="category-title">
-          <h3>Hộp sứ dưỡng sinh</h3>
-        </div>
-      </a>
-    </div>
-  
-    <div class="category-item">
-      <a href="#">
-        <div class="category-image">
-          <img src="../../../assets/img/danhmuc_6.png" alt="Bộ Trà">
-        </div>
-        <div class="category-title">
-          <h3>Bộ Trà</h3>
-        </div>
-      </a>
-    </div>
-  </div>
+
+
+

@@ -10,7 +10,7 @@
     <div class="col-lg-8 col-2">
       <ul class="navbar-nav mr-auto justify-content-center">
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [style.color]="isActive('/user') ? '#CC7F45' : 'inherit'" routerLink="/">TRANG CHỦ <span class="sr-only">(current)</span></a>
+          <a class="nav-link" [style.color]="isActive('/user') ? '#CC7F45' : 'inherit'" routerLink="home">TRANG CHỦ <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [style.color]="isActive('/user/gioithieu') ? '#CC7F45' : 'inherit'" routerLink="gioithieu">GIỚI THIỆU</a>
@@ -137,10 +137,6 @@
           Đăng ký nhận tin
         </h4>
         <span class="content-mailchimp" style="color:aliceblue">Đăng ký ngay! Để nhận thật nhiều ưu đãi</span>
-        <!-- <form id="mc-form" class="newsletter-form" data-toggle="validator" novalidate="true">
-          <input aria-label="Địa chỉ Email" type="email" class="form-control" placeholder="Nhập địa chỉ email" name="EMAIL" required="" autocomplete="off">
-          <button class="btn btn-default" type="submit" aria-label="Đăng ký nhận tin" name="subscribe">ĐĂNG KÝ</button>
-        </form> -->
     
         <div class="p-inputgroup" style="border-radius: 50%;">
           <input type="text" pInputText placeholder="Nhập địa chỉ email" />
@@ -148,9 +144,9 @@
       </div>
     
         <div class="mailchimp-alerts ">
-          <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-          <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-          <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+          <div class="mailchimp-submitting"></div>
+          <div class="mailchimp-success"></div>
+          <div class="mailchimp-error"></div>
         </div>
         <h4 class="title-menu" style="color:aliceblue">
           Hình thức thanh toán

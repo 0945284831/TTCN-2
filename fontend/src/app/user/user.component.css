@@ -1,3 +1,12 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+html, body {
+  height: 100%;
+}
 .container{
   max-width:1300px;
 }
@@ -71,7 +80,7 @@ a{
 }
 
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -80,7 +89,6 @@ footer {
   color: #ffffff; /* Màu chữ trắng, bạn có thể điều chỉnh tùy ý */
   display: flex;
   align-items: center;
-  justify-content: space-around;
   overflow: hidden;
 }
 
@@ -95,8 +103,6 @@ footer::before {
   content: '';
   width: 1000px; /* Đường kính của ảnh xoay tròn */
   height: 1000px; /* Đường kính của ảnh xoay tròn */
-  /* margin-right: -600px; */
-  /* left: 10%; */
   right:20%;
   background: url('https://free.vector6.com/wp-content/uploads/2021/03/E271-vector-trong-dong.jpg') center/cover;
   animation: rotate 10s linear infinite; /* Thay đổi thời gian và kiểu chuyển động nếu cần */

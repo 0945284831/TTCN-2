@@ -12,15 +12,15 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { GioithieuComponent } from './gioithieu/gioithieu.component';
 import { LienheComponent } from './lienhe/lienhe.component';
-
-
-
+import { CarouselModule } from 'primeng/carousel';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     UserComponent,
     GioithieuComponent,
-    LienheComponent,  
+    LienheComponent,
+    HomeComponent,  
   ],
   imports: [
     CommonModule,
@@ -31,7 +31,8 @@ import { LienheComponent } from './lienhe/lienhe.component';
     NgbCollapseModule,
     InputTextModule,
     CheckboxModule,
-    RadioButtonModule
+    RadioButtonModule,
+    CarouselModule
   ]
 })
 export class UserModule { }

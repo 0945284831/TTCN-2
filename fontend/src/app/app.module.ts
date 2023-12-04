@@ -9,6 +9,7 @@ import { TableModule } from 'primeng/table';
 import { AdminRoutingModule } from './admin/admin-routing.module'
 import { UserRoutingModule } from './user/user-routing.module'
 
+
 @NgModule({
   
   declarations: [

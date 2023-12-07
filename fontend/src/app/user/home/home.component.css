@@ -12,16 +12,19 @@ a{
 .category-item:hover .custom-img img {
     transform: translateY(-15px);
 } 
+.category-item:hover p {
+  color: #CC7F45; 
+}  
 
 figure {
 	width: 624px;
-    height: 525px;
+  height: 525px;
 	margin: 0;
 	padding: 0;
 	background: #fff;
 	overflow: hidden;
-    border-radius: 8px;
-    margin-right: 10px;
+  border-radius: 8px;
+  margin-right: 10px;
 }
 figure:hover+span {
 	bottom: -36px;
@@ -39,3 +42,53 @@ figure:hover img {
 	-webkit-transform: rotate(0) scale(1);
 	transform: rotate(0) scale(1);
 }
+
+.nghenhan{
+  background-image: url(../../../assets/img/background-nghenhan.png);
+  background-size: cover;
+  padding-top: 30px;
+}
+
+.social-icons-container {
+  position: relative;
+  display: inline-block;
+}
+
+.thumb span img{
+  width: 100%;
+    vertical-align: middle;
+    border-style: none;
+    max-width: 100%;
+    height: auto;
+}
+
+.contact {
+  position: absolute;
+    right: -25px;
+    bottom: 40px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.contact li {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+.contact li a {
+  text-decoration: none;
+  font-size: 20px;
+}
+.contact li:hover{
+  background-color: #CC7F45;
+  color: #ddd;
+}
+
+
+

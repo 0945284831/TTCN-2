@@ -4,7 +4,13 @@ const cors = require('cors');
 const mainCategoryRoutes = require('./routes/mainCategoryRoutes');
 const subCategoryRoutes = require('./routes/subCategoryRoutes');
 const productRoutes = require('./routes/productRoutes');
+const authRoutes = require('./routes/authen'); 
+const user = require('./routes/user'); 
+const token = require('./routes/token'); 
+const giohang = require('./routes/giohang'); 
+const donhang = require('./routes/donhang'); 
 
+require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -28,7 +34,13 @@ app.use(cors(corsOptions));
 app.use(mainCategoryRoutes);
 app.use(subCategoryRoutes);
 app.use(productRoutes);
+app.use(user);
+app.use(token);
+app.use(giohang);
+app.use(donhang);
+app.use('/auth', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+

@@ -14,13 +14,21 @@ import { GioithieuComponent } from './gioithieu/gioithieu.component';
 import { LienheComponent } from './lienhe/lienhe.component';
 import { CarouselModule } from 'primeng/carousel';
 import { HomeComponent } from './home/home.component';
+import { CuahangComponent } from './cuahang/cuahang.component';
+import { SanphamComponent } from './sanpham/sanpham.component';
+import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
+import { RatingModule } from 'primeng/rating';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
     UserComponent,
     GioithieuComponent,
     LienheComponent,
-    HomeComponent,  
+    HomeComponent,
+    CuahangComponent,
+    SanphamComponent,
+      
   ],
   imports: [
     CommonModule,
@@ -32,7 +40,10 @@ import { HomeComponent } from './home/home.component';
     InputTextModule,
     CheckboxModule,
     RadioButtonModule,
-    CarouselModule
+    CarouselModule,
+    DataViewModule,
+    RatingModule,
+    TagModule,
   ]
 })
 export class UserModule { }

@@ -16,7 +16,7 @@
           <a class="nav-link" [style.color]="isActive('/user/gioithieu') ? '#CC7F45' : 'inherit'" routerLink="gioithieu">GIỚI THIỆU</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle " href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-bottom:20px;">
+          <a class="nav-link dropdown-toggle " [style.color]="isActive('/user/sanpham') ? '#CC7F45' : 'inherit'" routerLink="sanpham" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-bottom:20px;">
             SẢN PHẨM
           </a>
             <ul class="dropdown-menu custom-dropdown dropdown-menu-lg-start " aria-labelledby="navbarDarkDropdownMenuLink">
@@ -45,7 +45,7 @@
           <a class="nav-link" href="#">TIN TỨC</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">CỬA HÀNG</a>
+          <a class="nav-link" [style.color]="isActive('/user/cuahang') ? '#CC7F45' : 'inherit'" routerLink="cuahang">CỬA HÀNG</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [style.color]="isActive('/user/lienhe') ? '#CC7F45' : 'inherit'" routerLink="lienhe">LIÊN HỆ</a>
@@ -63,100 +63,102 @@
 </nav>
 
 
-<router-outlet></router-outlet>
+<router-outlet class="router-outlet"></router-outlet>
 
 
 
-
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-lg-4 ft-info"style="color:aliceblue"> 
-        <h4 class="title-menu" style="color:aliceblue" > 
-          Thông tin
-        </h4>
-        <div class="group-address">
-          <ul>
-            <li>
-              <i class="pi pi-map-marker" style="margin-right: 10px;">
-                <span style="color:aliceblue">
-                70 Lữ Gia, Phường 15, Quận 11, TP. HCM
-                </span>
-              </i>
-            </li>
-            <li>  
-              <i class="pi pi-phone" style="margin-right: 100px;"> 
-                <a title="1900 6750" href="tel:19006750">1900 6750</a>
-              </i>
-            </li>
-            <li>    
-              <i class="pi pi-envelope">
-                <a title="support@sapo.vn" href="mailto:support@sapo.vn">supportsapo.vn</a>
-              </i>   
-            </li>
+<div class="footer">
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-4 ft-info"style="color:aliceblue"> 
+          <h4 class="title-menu" style="color:aliceblue" > 
+            Thông tin
+          </h4>
+          <div class="group-address">
+            <ul>
+              <li>
+                <i class="pi pi-map-marker" style="margin-right: 10px;">
+                  <span style="color:aliceblue">
+                  70 Lữ Gia, Phường 15, Quận 11, TP. HCM
+                  </span>
+                </i>
+              </li>
+              <li>  
+                <i class="pi pi-phone" style="margin-right: 100px;"> 
+                  <a title="1900 6750" href="tel:19006750">1900 6750</a>
+                </i>
+              </li>
+              <li>    
+                <i class="pi pi-envelope">
+                  <a title="support@sapo.vn" href="mailto:support@sapo.vn">supportsapo.vn</a>
+                </i>   
+              </li>
+            </ul>
+          </div>	
+          <h4 class="title-menu" style="color:aliceblue">
+            Mạng xã hội
+          </h4>
+          <ul class="social d-flex" style="margin-bottom: 20px;">
+            <li class="mr-3"><a href="#" title="Zalo"><img width="32" height="32" title="Zalo" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/zalo.png?1700209535143" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/zalo.png?1700209535143" data-was-processed="true"></a></li>
+            <li class="mr-3"><a href="#" title="Facebook"><img width="32" height="32" title="Facebook" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/facebook.png?1700209535143" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/facebook.png?1700209535143" data-was-processed="true"></a></li>
+            <li class="mr-3"><a href="#" title="Youtube"><img width="32" height="32" title="Youtube" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/youtube.png?1700209535143" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/youtube.png?1700209535143" data-was-processed="true"></a></li>
+            <li><a href="#" title="Google"><img width="32" height="32" title="Google" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/google.png?1700209535143" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/google.png?1700209535143" data-was-processed="true"></a></li>
           </ul>
-        </div>	
-        <h4 class="title-menu" style="color:aliceblue">
-          Mạng xã hội
-        </h4>
-        <ul class="social d-flex" style="margin-bottom: 20px;">
-          <li class="mr-3"><a href="#" title="Zalo"><img width="32" height="32" title="Zalo" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/zalo.png?1700209535143" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/zalo.png?1700209535143" data-was-processed="true"></a></li>
-          <li class="mr-3"><a href="#" title="Facebook"><img width="32" height="32" title="Facebook" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/facebook.png?1700209535143" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/facebook.png?1700209535143" data-was-processed="true"></a></li>
-          <li class="mr-3"><a href="#" title="Youtube"><img width="32" height="32" title="Youtube" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/youtube.png?1700209535143" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/youtube.png?1700209535143" data-was-processed="true"></a></li>
-          <li><a href="#" title="Google"><img width="32" height="32" title="Google" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/google.png?1700209535143" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/google.png?1700209535143" data-was-processed="true"></a></li>
-        </ul>
-      </div>
-      <div class="col-12 col-lg-5 ft-menu"> 
-        <div class="row">
-          <div class="col-12 col-sm-6 link-list col-footer footer-click" style="color:aliceblue">
-            <h4 class="title-menu title-menu2" style="color:aliceblue">
-              Chính sách
-            </h4>
-            <ul class="list-menu hidden-mobile">
-              <li><a href="/chinh-sach-bao-mat" title="Chính sách bảo mật">Chính sách bảo mật</a></li>        
-              <li><a href="/chinh-sach-van-chuyen" title="Chính sách vận chuyển">Chính sách vận chuyển</a></li>
-              <li><a href="/chinh-sach-doi-tra" title="Chính sách đổi trả">Chính sách đổi trả</a></li>         
-              <li><a href="/quy-dinh-su-dung" title="Quy định sử dụng">Quy định sử dụng</a></li>         
-            </ul>
-          </div>
-          <div class="col-12 col-sm-6 link-list col-footer footer-click">
-            <h4 class="title-menu title-menu2" style="color:aliceblue">
-              Hướng dẫn
-            </h4>
-            <ul class="list-menu hidden-mobile" style="color:aliceblue">         
-              <li><a href="/huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua hàng</a></li>         
-              <li><a href="/huong-dan-thanh-toan" title="Hướng dẫn thanh toán">Hướng dẫn thanh toán</a></li>         
-              <li><a href="/huong-dan-giao-nhan" title="Hướng dẫn giao nhận">Hướng dẫn giao nhận</a></li>
-              <li><a href="/dieu-khoan-dich-vu" title="Điều khoản dịch vụ">Điều khoản dịch vụ</a></li>
-            </ul>
+        </div>
+        <div class="col-12 col-lg-5 ft-menu"> 
+          <div class="row">
+            <div class="col-12 col-sm-6 link-list col-footer footer-click" style="color:aliceblue">
+              <h4 class="title-menu title-menu2" style="color:aliceblue">
+                Chính sách
+              </h4>
+              <ul class="list-menu hidden-mobile">
+                <li><a href="/chinh-sach-bao-mat" title="Chính sách bảo mật">Chính sách bảo mật</a></li>        
+                <li><a href="/chinh-sach-van-chuyen" title="Chính sách vận chuyển">Chính sách vận chuyển</a></li>
+                <li><a href="/chinh-sach-doi-tra" title="Chính sách đổi trả">Chính sách đổi trả</a></li>         
+                <li><a href="/quy-dinh-su-dung" title="Quy định sử dụng">Quy định sử dụng</a></li>         
+              </ul>
+            </div>
+            <div class="col-12 col-sm-6 link-list col-footer footer-click">
+              <h4 class="title-menu title-menu2" style="color:aliceblue">
+                Hướng dẫn
+              </h4>
+              <ul class="list-menu hidden-mobile" style="color:aliceblue">         
+                <li><a href="/huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua hàng</a></li>         
+                <li><a href="/huong-dan-thanh-toan" title="Hướng dẫn thanh toán">Hướng dẫn thanh toán</a></li>         
+                <li><a href="/huong-dan-giao-nhan" title="Hướng dẫn giao nhận">Hướng dẫn giao nhận</a></li>
+                <li><a href="/dieu-khoan-dich-vu" title="Điều khoản dịch vụ">Điều khoản dịch vụ</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-12 col-lg-3"> 
-        <h4 class="title-menu" style="color:aliceblue">
-          Đăng ký nhận tin
-        </h4>
-        <span class="content-mailchimp" style="color:aliceblue">Đăng ký ngay! Để nhận thật nhiều ưu đãi</span>
-    
-        <div class="p-inputgroup" style="border-radius: 50%;">
-          <input type="text" pInputText placeholder="Nhập địa chỉ email" />
-          <button type="button" pButton style="background:#D58C36; color:aliceblue;">ĐĂNG KÝ</button>
-      </div>
-    
-        <div class="mailchimp-alerts ">
-          <div class="mailchimp-submitting"></div>
-          <div class="mailchimp-success"></div>
-          <div class="mailchimp-error"></div>
+        <div class="col-12 col-lg-3"> 
+          <h4 class="title-menu" style="color:aliceblue">
+            Đăng ký nhận tin
+          </h4>
+          <span class="content-mailchimp" style="color:aliceblue">Đăng ký ngay! Để nhận thật nhiều ưu đãi</span>
+      
+          <div class="p-inputgroup" style="border-radius: 50%;">
+            <input type="text" pInputText placeholder="Nhập địa chỉ email" />
+            <button type="button" pButton style="background:#D58C36; color:aliceblue;">ĐĂNG KÝ</button>
         </div>
-        <h4 class="title-menu" style="color:aliceblue">
-          Hình thức thanh toán
-        </h4>
-        <ul class="thanhtoan">
-          <li><img width="57" height="35" alt="Payment 1" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_1.png?1700209535143" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_1.png?1700209535143" data-was-processed="true"></li>
-          <li><img width="57" height="35" alt="Payment 2" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_2.png?1700209535143" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_2.png?1700209535143" data-was-processed="true"></li>
-          <li><img width="57" height="35" alt="Payment 3" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_3.png?1700209535143" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_3.png?1700209535143" data-was-processed="true"></li>
-        </ul>       
+      
+          <div class="mailchimp-alerts ">
+            <div class="mailchimp-submitting"></div>
+            <div class="mailchimp-success"></div>
+            <div class="mailchimp-error"></div>
+          </div>
+          <h4 class="title-menu" style="color:aliceblue">
+            Hình thức thanh toán
+          </h4>
+          <ul class="thanhtoan">
+            <li><img width="57" height="35" alt="Payment 1" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_1.png?1700209535143" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_1.png?1700209535143" data-was-processed="true"></li>
+            <li><img width="57" height="35" alt="Payment 2" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_2.png?1700209535143" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_2.png?1700209535143" data-was-processed="true"></li>
+            <li><img width="57" height="35" alt="Payment 3" data-src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_3.png?1700209535143" class="lazyload loaded" src="//bizweb.dktcdn.net/100/485/241/themes/911577/assets/payment_3.png?1700209535143" data-was-processed="true"></li>
+          </ul>       
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
+  
+</div>

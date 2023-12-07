@@ -1,0 +1,30 @@
+.header{
+    background: url('../../../assets/img/nền.png') center/cover;
+    text-align: center;
+}
+.header .container{
+    max-width:1000px !important;
+}
+.category-item {
+    
+    max-width: 174px; 
+  }
+
+.custom-img img{
+    border-radius: 50% !important;
+    max-width: 174px; 
+  }
+a{
+  text-decoration: none;
+  color:#000;  
+}
+.category-item:hover .custom-img img {
+  transform: translateY(-15px);
+} 
+.category-item:hover p {
+  color: #CC7F45; 
+}  
+
+a .product_name:hover{
+    color: #CC7F45;
+}

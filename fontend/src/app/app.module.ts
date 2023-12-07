@@ -8,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TableModule } from 'primeng/table';
 import { AdminRoutingModule } from './admin/admin-routing.module'
 import { UserRoutingModule } from './user/user-routing.module'
-
+import { ProductService } from '../assets/service/product.service';
 
 @NgModule({
   
@@ -26,7 +26,7 @@ import { UserRoutingModule } from './user/user-routing.module'
     UserRoutingModule,
     
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

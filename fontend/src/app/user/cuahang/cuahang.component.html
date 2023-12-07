@@ -1,0 +1,52 @@
+
+<div class="header">
+    <div class="container" style="padding-top: 50px; text-align: center;">
+        <nav aria-label="breadcrumb" style="display: inline-block;">
+            <h2 style=" color: #CC7F45;">Cửa Hàng</h2>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+              <li class="breadcrumb-item" style=" color: #CC7F45;" >Cửa Hàng</li>
+            </ol>
+        </nav>
+        
+        <p-carousel [value]="subCategories" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+            <ng-template let-subCategories pTemplate="item">
+                <a class="m-2 text-center py-3 px-5 category-item">
+                    <div class="mb-1 custom-img">
+                        <img class="" [src]="subCategories.imageUrl" [alt]="subCategories.title">
+                    </div>
+                    <div>
+                        <p class="mb-1 mt-3">{{ subCategories.title }}</p>
+                    </div>
+                </a>
+            </ng-template>
+        </p-carousel>
+    </div>
+</div>
+<div class="container text-center mt-5 mb-3" style="color:#CC7F45; border-bottom: 3px solid #CC7F45;   
+padding-bottom: 5px;
+border-radius: 4px;">
+    <h2> Hiện trên hệ thống đang có duy nhất 1 cửa hàng</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-12">
+            <div class="thongtin">
+                <b style="color:#CC7F45">VP Khoa Công Nghệ Thông Tin VNUA </b>
+                <div>
+                    <b>Địa chỉ: </b>
+                    P316, Tầng 3 Nhà Hành chính VNUA
+                </div>
+                <div>
+                    <b>Hotline:</b>
+                    <span style="color:#CC7F45"> 0945284831</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-12">
+            <div id="contact_map" class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1566.0397321420398!2d105.93071276545652!3d21.005012647535754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135a94c1f882977%3A0x6d016e6656923f46!2zSOG7jWMgdmnhu4duIE7DtG5nIE5naGnhu4dwIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1701696032400!5m2!1svi!2s" width="100%" height="700px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

@@ -29,6 +29,8 @@ import { DataViewModule } from 'primeng/dataview';
 import { RatingModule } from 'primeng/rating';
 import { TagModule } from 'primeng/tag';
 import { DialogModule } from 'primeng/dialog';
+import { TintucComponent } from './tintuc/tintuc.component';
+import { TintucAddComponent } from './tintuc/tintuc-add/tintuc-add/tintuc-add.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { DialogModule } from 'primeng/dialog';
     SubCategoryComponent,
     AddProductComponent,
     ProductListComponent,
+    TintucComponent,
+    TintucAddComponent,
     
   ],
   imports: [

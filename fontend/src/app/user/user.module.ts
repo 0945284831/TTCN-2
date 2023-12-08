@@ -19,6 +19,7 @@ import { SanphamComponent } from './sanpham/sanpham.component';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 import { RatingModule } from 'primeng/rating';
 import { TagModule } from 'primeng/tag';
+import { TintucComponent } from './tintuc/tintuc.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { TagModule } from 'primeng/tag';
     HomeComponent,
     CuahangComponent,
     SanphamComponent,
+    TintucComponent,
       
   ],
   imports: [

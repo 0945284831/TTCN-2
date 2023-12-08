@@ -1,0 +1,42 @@
+<div class="container" style="padding-top: 50px; text-align: center;">
+    <h2 style="color: #CC7F45;">Thêm tin tức mới</h2>
+    <form [formGroup]="form" (submit)="addNews()" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="title">Tiêu đề:</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="news.title" required>
+      </div>
+      <div class="row mb-3">
+        <label for="productImage" class="form-label col-sm-2" style="width: 140px;">Ảnh Sản Phẩm:</label>
+        <div class="col-sm-10">
+          <input type="file" #fileInput style="display: none" multiple (change)="onFileSelect($event)" name="newsImage" />
+          <button type="button" class="btn btn-primary" (click)="fileInput.click()">
+            <i class="pi pi-upload"></i> Thêm ảnh
+          </button>
+        </div>
+      </div>
+
+      <div class="list-group mt-3">
+        <ul *ngIf="imageDataList.length > 0" class="list-group-item d-flex flex-row flex-wrap">
+          <div *ngFor="let imageData of imageDataList" class="pr-2">
+            <p-image [src]="imageData" alt="Image" width="250" [preview]="true"></p-image>
+          </div>
+          <div class="w-100"></div>
+          <div class="mt-2">
+            <button type="button" class="btn btn-danger" (click)="clearImages()">Clear All</button>
+          </div>
+        </ul>
+      </div>
+
+
+      <div class="form-group">
+        <label for="publishedAt">Ngày đăng:</label>
+        <input type="date" class="form-control" id="publishedAt" [(ngModel)]="news.publishedAt" required>
+      </div>
+      <div class="form-group">
+        <label for="content">Nội dung:</label>
+        <textarea class="form-control" id="content" [(ngModel)]="news.content" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Thêm tin tức</button>
+    </form>
+  </div>
+  

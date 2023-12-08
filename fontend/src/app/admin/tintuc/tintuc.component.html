@@ -1,0 +1,36 @@
+Thêm phần này vào template
+<div class='card'>
+    <!-- user.component.html -->
+    <button class="btn btn-primary" [routerLink]="['/admin/tintuc/add-news']">Thêm tin tức mới</button>
+
+    <div class='table-responsive text-center'>
+      <table class='table' *ngIf='newsList.length'>
+        <thead>
+          <tr>
+            <th>Ảnh</th>
+            <th>Tiêu đề</th>
+            <th>Nội dung</th>
+            <th>Tác giả</th>
+            <th>Ngày xuất bản</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let news of newsList'>
+            <td>
+              <img
+                *ngIf="news.img"
+                [src]="news.img"
+                alt="News Image"
+                style="width: 100px; height: auto;"
+              />
+            </td>
+            <td>{{ news.title }}</td>
+            <td>{{ news.content }}</td>
+            <td>{{ news.author }}</td>
+            <td>{{ news.publishedAt | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

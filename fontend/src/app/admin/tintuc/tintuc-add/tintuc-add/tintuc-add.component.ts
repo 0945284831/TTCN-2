@@ -24,13 +24,29 @@ export class TintucAddComponent {
   uploadedFiles: any[] = [];
   form!: FormGroup;
 
-  constructor(private router: Router,
-    private location: Location, 
-    private NewsService :NewsService,
-    private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private location: Location,
+    private NewsService: NewsService,
+    private http: HttpClient,
+    private formBuilder: FormBuilder
+  ) {
+    this.form = this.formBuilder.group({
+      title: ['', Validators.required],
+      content: ['', Validators.required],
+      publishedAt: ['', Validators.required],
+      author: [''],  // Add an author field here
+      tags: [''],
+      newsImage: [null],  // Assuming newsImage is a File input
+    });
+  }
     
 
   async addNews() {
+    if (!this.form || !this.form.value) {
+      console.error('Form or form value is undefined.');
+      return;
+    }
     const newsImage: File[] = this.form.value.newsImage;
     this.clearImages();
   
@@ -42,22 +58,10 @@ export class TintucAddComponent {
     newsData.append('tags', this.form.value.tags);
     // newsData.append('newsImage', this.news.newsImage as File);
     for (let i = 0; i < newsImage.length; i++) {
-      newsData.append('productImage', newsImage[i]);
+      newsData.append('newsImage', newsImage[i]);
     }
-
-    // this.http.post<any>('http://localhost:3000/news', formData).subscribe(
-    //   (response) => {
-    //     console.log('News added successfully:', response);
-    //     this.router.navigate(['/news']);
-    //   },
-    //   (error) => {
-    //     console.error('Error adding news:', error);
-    //   }
-    // );
     try {
-      // Make a single request to add the product with all images
       await this.NewsService.addNews(newsData);
-      // Navigate to the product list page (/admin/products) after successful addition
       this.router.navigate(['/admin/tintuc']);
     } catch (error) {
       console.error('Error adding tintuc:', error);
@@ -100,7 +104,7 @@ export class TintucAddComponent {
       }
 
       // Update the form control to store the array of files
-      this.form.patchValue({ productImage: files });
+      this.form.patchValue({ newsImage: files });
       
     }
 

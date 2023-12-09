@@ -3,7 +3,7 @@
     <form [formGroup]="form" (submit)="addNews()" enctype="multipart/form-data">
       <div class="form-group">
         <label for="title">Tiêu đề:</label>
-        <input type="text" class="form-control" id="title" [(ngModel)]="news.title" required>
+        <input type="text" class="form-control" id="title"  required>
       </div>
       <div class="row mb-3">
         <label for="productImage" class="form-label col-sm-2" style="width: 140px;">Ảnh Sản Phẩm:</label>
@@ -30,13 +30,13 @@
 
       <div class="form-group">
         <label for="publishedAt">Ngày đăng:</label>
-        <input type="date" class="form-control" id="publishedAt" [(ngModel)]="news.publishedAt" required>
+        <input type="date" class="form-control" id="publishedAt" required>
       </div>
       <div class="form-group">
         <label for="content">Nội dung:</label>
-        <textarea class="form-control" id="content" [(ngModel)]="news.content" rows="4" required></textarea>
+        <textarea class="form-control" id="content" rows="4" required></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Thêm tin tức</button>
+      <button type="submit" class="btn btn-primary">Thêm tin tức</button>
     </form>
   </div>
   

@@ -6,7 +6,6 @@ const fs = require('fs');
 const slugify = require('slugify');
 const News = require('../models/tintucModel');
 
-
 const sanitizeFilename = (filename) => {
   // Chuyển đổi tên file thành dạng slug (URL-friendly)
   const slug = slugify(filename, { lower: true });
@@ -27,13 +26,34 @@ const storage = multer.diskStorage({
     const fileType = mimeType[1];
     const sanitizedNewsTitle = sanitizeFilename(req.body.title);
     const fileName = `${sanitizedNewsTitle}_${newsImageCount + 1}.${fileType}`;
+    newsImageCount++;
     cb(null, fileName);
   },
 });
 
 const upload = multer({ storage: storage });
+router.use('/news', (req, res, next) => {
+  newsImageCount = 0;
+  next();
+});
+const staticPath = path.join(__dirname, 'uploads/news');
+router.use('/uploads/news', express.static(staticPath))
 
-// Route: Lấy danh sách tin tức
+// Route: Tạo tin tức mới với hình ảnh
+router.post('/news', upload.array('newsImage', 10), async (req, res) => {
+  try {
+    console.log('Request Body:', req.body); // Kiểm tra dữ liệu gửi lên
+    const imagePath = req.files.map(file => `/uploads/news/${file.filename}`);
+    console.log('Image Path:', imagePath); // Kiểm tra đường dẫn ảnh
+    const { title, content, author, tags } = req.body;
+    const newNews = new News({ title, content, author, tags, newsImage: imagePath });
+    const savedNews = await newNews.save();
+    res.json(savedNews);
+  } catch (error) {
+    console.error('Error:', error); // Kiểm tra lỗi
+    res.status(500).json({ error: 'Lỗi khi tạo tin tức mới' });
+  }
+});
 router.get('/news', async (req, res) => {
   try {
     const newsList = await News.find();
@@ -43,20 +63,6 @@ router.get('/news', async (req, res) => {
   }
 });
 
-// Route: Tạo tin tức mới với hình ảnh
-router.post('/news', upload.array('newsImage',10), async (req, res) => {
-  try {
-    
-    const imagePath = req.file.map(file => `/uploads/news/${file.filename}`);
-    const { title, content, author, tags } = req.body;
-    const newNews = new News({ title, content, author, tags, newsImage: imagePath });
-    const savedNews = await newNews.save();
-
-    res.json(savedNews);
-  } catch (error) {
-    res.status(500).json({ error: 'Lỗi khi tạo tin tức mới' });
-  }
-});
 
 // Route: Xóa tin tức theo ID
 router.delete('/news/:id', async (req, res) => {

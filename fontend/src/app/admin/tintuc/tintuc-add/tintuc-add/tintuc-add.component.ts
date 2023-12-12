@@ -40,7 +40,39 @@ export class TintucAddComponent {
       newsImage: [null],  // Assuming newsImage is a File input
     });
   }
-    
+  onFileSelect(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.clearImages();
+
+    if (target && target.files && target.files.length > 0) {
+      const files = target.files;
+      this.uploadedFiles = [];
+      const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        if (allowedMimeTypes.includes(file.type)) {
+          const reader = new FileReader();
+
+          reader.onload = () => {
+            // Add image URL to the array
+            this.imageDataList.push(reader.result as string);
+          };
+
+          reader.readAsDataURL(file);
+        } else {
+          // Handle invalid file types (if needed)
+          console.error('Invalid file type:', file.type);
+        }
+      }
+
+      // Update the form control to store the array of files
+      this.form.patchValue({ newsImage: files });
+      
+    }
+
+  }
 
   async addNews() {
     if (!this.form || !this.form.value) {
@@ -76,39 +108,7 @@ export class TintucAddComponent {
 
 
 
-  onFileSelect(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.clearImages();
-
-    if (target && target.files && target.files.length > 0) {
-      const files = target.files;
-      this.uploadedFiles = [];
-      const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-
-        if (allowedMimeTypes.includes(file.type)) {
-          const reader = new FileReader();
-
-          reader.onload = () => {
-            // Add image URL to the array
-            this.imageDataList.push(reader.result as string);
-          };
-
-          reader.readAsDataURL(file);
-        } else {
-          // Handle invalid file types (if needed)
-          console.error('Invalid file type:', file.type);
-        }
-      }
-
-      // Update the form control to store the array of files
-      this.form.patchValue({ newsImage: files });
-      
-    }
-
-  }
+  
   clearImages() {
     this.imageDataList = [];
     // Optionally, you can also clear the form control value

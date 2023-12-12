@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { Subject } from "rxjs";
+import { map } from "rxjs/operators";
+export interface News {
+  title: string;
+  author: string;
+  content: string;
+  tags: string;
+  newsImage : string[];
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -14,8 +22,18 @@ export class NewsService {
     return this.http.get(this.apiUrl);
   }
 
-  addNews(newsData: any): Observable<any> {
-    return this.http.post(this.apiUrl, newsData);
+  addNews(newsData: FormData) {
+    this.http.post<{ news: News }>(this.apiUrl, newsData)
+      .subscribe(
+        (response) => {
+          // Handle the response as needed
+          console.log('Product added successfully:', response.news);
+        },
+        (error) => {
+          console.error('Error adding product:', error);
+          // Handle the error, show a message, etc.
+        }
+      );
   }
 
   // Thêm các phương thức khác nếu cần

@@ -6,7 +6,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { MenubarModule } from 'primeng/menubar';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
-import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -16,9 +16,18 @@ import { CarouselModule } from 'primeng/carousel';
 import { HomeComponent } from './home/home.component';
 import { CuahangComponent } from './cuahang/cuahang.component';
 import { SanphamComponent } from './sanpham/sanpham.component';
-import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
+import { DataViewModule } from 'primeng/dataview';
 import { RatingModule } from 'primeng/rating';
 import { TagModule } from 'primeng/tag';
+import { DangnhapComponent } from './dangnhap/dangnhap.component';
+import { DangkyComponent } from './dangky/dangky.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TaikhoanComponent } from './taikhoan/taikhoan.component';
+import { ToastModule } from 'primeng/toast';
+import { PasswordModule } from 'primeng/password';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { ChitietsanphamComponent } from './chitietsanpham/chitietsanpham.component';
 
 @NgModule({
   declarations: [
@@ -28,10 +37,14 @@ import { TagModule } from 'primeng/tag';
     HomeComponent,
     CuahangComponent,
     SanphamComponent,
-      
+    DangnhapComponent,
+    DangkyComponent,
+    TaikhoanComponent,
+    ChitietsanphamComponent,
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     UserRoutingModule,
     MenubarModule,
     DropdownModule,
@@ -44,6 +57,10 @@ import { TagModule } from 'primeng/tag';
     DataViewModule,
     RatingModule,
     TagModule,
+    ToastModule,
+    PasswordModule,
+    DialogModule,
+    ButtonModule
   ]
 })
 export class UserModule { }

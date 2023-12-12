@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { SubCategory } from './sub-category.service';
+import { Product } from './product.service'
 
 export interface MainCategory {
   mainCategoryId: string;
@@ -62,5 +63,9 @@ export class MainCategoryService {
   getSubCategoriesByMainCategory(mainCategoryId: string): Observable<SubCategory[]> {
     const url = `${this.apiUrl}/${mainCategoryId}/subcategories`;
     return this.http.get<SubCategory[]>(url);
+  }
+  getProductsByMainCategory(mainCategoryId: string): Observable<Product[]> {
+    const url = `${this.apiUrl}/${mainCategoryId}/products`;
+    return this.http.get<Product[]>(url);
   }
 }

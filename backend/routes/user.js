@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router();
 const User = require('../models/userModel'); // Điều chỉnh đường dẫn dựa trên cấu trúc dự án của bạn
+
+const router = express.Router();
 
 // Thêm thông tin liên hệ cho người dùng theo userId
 router.post('/users/:userId/addContactInfo', async (req, res) => {
@@ -42,5 +43,26 @@ router.post('/users/:userId/addContactInfo', async (req, res) => {
     res.status(500).json({ message: 'Lỗi Nội Bộ của Máy Chủ' });
   }
 });
+
+router.get('/user/:userId', async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    // Sử dụng findById để tìm người dùng theo userId
+    const user = await User.findById(userId).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'Không tìm thấy người dùng' });
+    }
+
+    res.json({ success: true, user });
+  } catch (error) {
+    console.error('Error getting user by userId:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+
+
 
 module.exports = router;

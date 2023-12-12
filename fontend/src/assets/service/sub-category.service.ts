@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Product } from './product.service'
 
 export interface SubCategory {
   subCategoryId: string;
@@ -36,6 +37,12 @@ export class SubCategoryService {
     const mainCategoryApiUrl = `http://localhost:3000/api/maincategories/${mainCategoryId}/name`;
     return this.http.get<string>(mainCategoryApiUrl);
   }
+
+  getProductsBySubCategory(subCategoryId: string): Observable<Product[]> {
+    const url = `${this.apiUrl}/${subCategoryId}/products`;
+    return this.http.get<Product[]>(url);
+  }
+
   deleteSubCategory(subCategoryId: string): Observable<any> {
     const url = `${this.apiUrl}/${subCategoryId}`;
     return this.http.delete(url);

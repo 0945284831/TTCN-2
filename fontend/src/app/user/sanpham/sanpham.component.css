@@ -28,3 +28,14 @@ a{
 a .product_name:hover{
     color: #CC7F45;
 }
+.custom-button button {
+  border: 1px solid #CC7F45; 
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-left: 5px;
+  text-align: center;
+}
+.custom-button button.active {
+  background-color: #CC7F45;
+  color: #fff; /* Màu chữ khi nút được chọn */
+}

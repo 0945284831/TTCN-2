@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center mx-auto">
   <div style="margin-left: 180px;">
     <a class="navbar-brand" href="#"><img src="https://bizweb.dktcdn.net/100/485/241/themes/911577/assets/logo.png?1700209535143" height="60" class="mr-2" /></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
@@ -25,11 +25,17 @@
                   <div class="col-lg-8 col-12 ">
                     <div class="row">
                       <div *ngFor="let mainCategory of mainCategories" class="col-md-4 mt-4 mb-4">
-                        <a class="h6 text-decoration-none" style="color:#CC7F45;">{{ mainCategory.mainCategoryName }}</a>
+                        <!-- <a class="h6 text-decoration-none" style="color:#CC7F45;">{{ mainCategory.mainCategoryName }}</a> -->
+                        <li>
+                          <a (click)="redirectToProductstomainCategoryId(mainCategory.mainCategoryId)"
+                          class="h6 text-decoration-none" 
+                          style="color:#CC7F45;"
+                          >{{ mainCategory.mainCategoryName }}</a>
+                        </li>
                         <ul class="list-unstyled">
                           <li *ngFor="let subCategory of mainCategory.subCategories">
-                            <a>{{ subCategory.subCategoryName }}</a>
-                          </li>
+                            <a (click)="redirectToProductstosubCategoryId(subCategory.subCategoryId)">{{ subCategory.subCategoryName }}</a>
+                          </li>                          
                         </ul>
                       </div>
                     </div>
@@ -54,8 +60,22 @@
     </div>
 
     <form class="form-inline my-2 my-lg-0">
-      <i><a class="pi pi-search text-decoration-none" herf="#"></a></i>
-      <i><a class="pi pi-user text-decoration-none"></a></i>
+      <i><a class="pi pi-search text-decoration-none"></a></i>
+      <div class="dropdown">
+        <i><a class="pi pi-user text-decoration-none dropbtn"></a></i>
+        <div class="dropdown-content">
+          <ng-container *ngIf="isLoggedIn(); else showLogin">
+            <a routerLink="taikhoan">Tài khoản</a>
+            <a (click)="logout()">Đăng xuất</a>
+          </ng-container>
+          <ng-template #showLogin>
+            <!-- Hiển thị khi chưa đăng nhập -->
+            <a routerLink="dangnhap">Đăng nhập</a>
+            <a routerLink="dangky">Đăng ký</a>
+          </ng-template>
+        </div>
+      </div>
+      
       <i><a class="pi pi-heart text-decoration-none"></a></i>
       <i><a class="pi pi-shopping-bag text-decoration-none"></a></i>
     </form>
@@ -80,18 +100,18 @@
               <li>
                 <i class="pi pi-map-marker" style="margin-right: 10px;">
                   <span style="color:aliceblue">
-                  70 Lữ Gia, Phường 15, Quận 11, TP. HCM
+                    P316, Tầng 3 Nhà Hành chính VNUA
                   </span>
                 </i>
               </li>
               <li>  
                 <i class="pi pi-phone" style="margin-right: 100px;"> 
-                  <a title="1900 6750" href="tel:19006750">1900 6750</a>
+                  <a title="0945284831" href="tel:19006750">0945284831</a>
                 </i>
               </li>
               <li>    
                 <i class="pi pi-envelope">
-                  <a title="support@sapo.vn" href="mailto:support@sapo.vn">supportsapo.vn</a>
+                  <a title="support@sapo.vn" href="mailto:toan.qt@izota.vn">toan.qt&#64;izota.vn</a>
                 </i>   
               </li>
             </ul>

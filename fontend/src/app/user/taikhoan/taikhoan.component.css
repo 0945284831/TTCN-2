@@ -1,0 +1,19 @@
+ 
+.vertical-tabs a {
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-decoration: none; /* Remove default underline */
+    color: black; /* Set default text color */
+  }
+  
+  .vertical-tabs a:hover {
+    color: #CC7F45; /* Change the color as desired */
+  }
+  
+  .content {
+    padding-left: 20px; /* Adjust the padding as needed */
+  }
+  .vertical-tabs a.selected {
+    color: #CC7F45; /* Change the color for the selected tab */
+  }
+  

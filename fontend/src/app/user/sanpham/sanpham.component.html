@@ -25,23 +25,43 @@
 <!-- product-list.component.html -->
   <div class="container">
     <div class="row">
-        <a href="#">
-            <div class="row">
-                <div class="col-12 col-sm-6 col-lg-3 p-2" *ngFor="let product of products; let i = index">
-                    <div class="p-4  surface-card border-round align-items-start">
-                        <div class="d-flex flex-column">
-                            <img style="width: 300px; height: 250px; object-fit: cover;" class="shadow border-round" [src]="'http://localhost:3000' + products[i].productImage[0]" [alt]="products[i].productName" />
-                            <div class=" font-weight-bold mt-3 product_name" style="height: 60px;">{{ products[i].productName }}</div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class=" font-weight-bold" style="color:red;">{{ products[i].productPrice | number:'1.0-2' }} VND</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
+        <div class="col-12 text-right custom-button">
+            <b class="mr-2">Sắp xếp:</b>
+            <button  [class.active]="selectedSortOrder === 'nameAsc'" (click)="onSortOrderChange('nameAsc')"><i class="pi pi-sort-alpha-down"></i> A - Z</button>
+            <button  [class.active]="selectedSortOrder === 'nameDesc'" (click)="onSortOrderChange('nameDesc')"><i class="pi pi-sort-alpha-up-alt"></i> Z - A</button>
+            <button [class.active]="selectedSortOrder === 'priceAsc'" (click)="onSortOrderChange('priceAsc')"><i class="pi pi-sort-amount-up-alt"></i> Giá tăng dần</button>
+            <button  [class.active]="selectedSortOrder === 'priceDesc'" (click)="onSortOrderChange('priceDesc')"><i class="pi pi-sort-amount-down-alt"></i> Giá giảm dần</button>
+        </div>
+      </div>
+      
         
-    </div>
+      <!-- <div *ngIf="updatingProducts; else productSection">
+        <p>Sản phẩm đang được cập nhật...</p>
+      </div> -->
+      <div *ngIf="noProducts; else productSection">
+        <div style="margin-top: 20px" class="alert alert-warning alert-warning2 alert-dismissible margin-top-15 section" role="alert">
+            Sản phẩm đang được cập nhật.
+        </div>
+      </div>
+<ng-template #productSection>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-lg-3 p-2" *ngFor="let product of products; let i = index">
+          <div class="p-4  surface-card border-round align-items-start">
+            <div class="d-flex flex-column">
+              <!-- Sử dụng routerLink để chuyển đến trang chi tiết sản phẩm với ID tương ứng -->
+              <!-- <a (click)="redirectToProductsId(products[i].productId)"> -->
+                <img style="width: 300px; height: 250px; object-fit: cover;" class="shadow border-round"
+                  [src]="'http://localhost:3000' + product.productImage[0]" [alt]="product.productName" />
+                <div class=" font-weight-bold mt-3 product_name" style="height: 60px;">{{ product.productName }}</div>
+              <!-- </a> -->
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class=" font-weight-bold" style="color:red;">{{ product.productPrice | number:'1.0-2' }} VND</span>
+            </div>
+          </div>
+        </div>
+      </div>      
+</ng-template>
 </div>
 
 

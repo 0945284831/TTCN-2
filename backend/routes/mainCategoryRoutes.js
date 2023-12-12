@@ -1,6 +1,8 @@
 const express = require('express');
 const MainCategory = require('../models/mainCategoryModel');
 const SubCategory = require('../models/subCategoryModel');
+const Product = require('../models/productModel');
+
 
 const router = express.Router();
 
@@ -60,6 +62,30 @@ router.delete('/api/maincategories/:mainCategoryId', async (req, res) => {
       // Xử lý bất kỳ lỗi nào xảy ra
       console.error(error);
       res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+  router.get('/api/maincategories/:mainCategoryId/products', async (req, res) => {
+    const { mainCategoryId } = req.params;
+  
+    try {
+        // Tìm danh mục chính theo ID
+        const mainCategory = await MainCategory.findById(mainCategoryId);
+  
+        if (!mainCategory) {
+            // Nếu không tìm thấy danh mục chính, trả về lỗi 404
+            return res.status(404).json({ error: 'Main category not found' });
+        }
+  
+        // Tìm tất cả các sản phẩm thuộc danh mục chính
+        const products = await Product.find({ mainCategoryId: mainCategory._id });
+  
+        // Trả về danh sách các sản phẩm
+        res.json(products);
+    } catch (error) {
+        // Xử lý bất kỳ lỗi nào xảy ra
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
     }
   });
 

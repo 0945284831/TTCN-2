@@ -3,6 +3,7 @@ import { Router, NavigationEnd  } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { MainCategoryService, MainCategory } from '../../assets/service/main-category.service';
 import { SubCategoryService, SubCategory } from '../../assets/service/sub-category.service';
+import { AuthService } from '../../assets/service/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -17,7 +18,9 @@ export class UserComponent implements OnInit {
   
   constructor(
     private router: Router,
-    private mainCategoryService: MainCategoryService
+    private mainCategoryService: MainCategoryService,
+    private subCategoryService: SubCategoryService,
+    private authService: AuthService
   ) {}
 
 
@@ -28,8 +31,32 @@ export class UserComponent implements OnInit {
     this.loadMainCategories();
   }
 
+  isLoggedIn(): boolean {
+    // Gọi phương thức từ AuthService để kiểm tra trạng thái đăng nhập
+    return this.authService.getLoginStatus();
+  }
+
+  logout(): void {
+    // Gọi phương thức đăng xuất từ AuthService
+    this.authService.logout().subscribe(
+      () => {
+        // Thực hiện các hành động cần thiết sau khi đăng xuất
+      },
+      (error) => {
+        console.error('Logout Error:', error);
+      }
+    );
+  }
+
   isActive(route: string): boolean {
     return this.router.isActive(route, true);
+  }
+
+  redirectToProductstomainCategoryId(mainCategoryId: string): void {
+    this.router.navigate(['/user/sanpham', { mainCategoryId }]);
+  }
+  redirectToProductstosubCategoryId(subCategoryId: string): void {
+    this.router.navigate(['/user/sanpham', { subCategoryId }]);
   }
 
   loadMainCategories() {

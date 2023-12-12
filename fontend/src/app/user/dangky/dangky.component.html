@@ -1,0 +1,77 @@
+
+<div class="header">
+    <div class="container" style="padding-top: 50px; text-align: center;">
+        <nav aria-label="breadcrumb" style="display: inline-block;">
+            <h2 style=" color: #CC7F45;">Đăng Ký</h2>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+              <li class="breadcrumb-item" style=" color: #CC7F45;" >Đăng Ký</li>
+            </ol>
+        </nav>
+        
+        <p-carousel [value]="subCategories" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+            <ng-template let-subCategories pTemplate="item">
+                <a class="m-2 text-center py-3 px-5 category-item">
+                    <div class="mb-1 custom-img">
+                        <img class="" [src]="subCategories.imageUrl" [alt]="subCategories.title">
+                    </div>
+                    <div>
+                        <p class="mb-1 mt-3">{{ subCategories.title }}</p>
+                    </div>
+                </a>
+            </ng-template>
+        </p-carousel>
+    </div>
+</div>
+
+<div class="col-md-3 mx-auto mb-5 mt-3">
+    <div class="row">
+    <div class="col-md-6">
+          <a 
+          [style.border-bottom-color]="isActive('/user/dangnhap') ? '#CC7F45' : 'inherit'" 
+          [style.color]="isActive('/user/dangnhap') ? '#CC7F45' : 'inherit'"
+          routerLink="/user/dangnhap" 
+          class="btn btn-block">Đăng nhập</a>
+      </div>
+      
+      <div class="col-md-6 ">
+          <a 
+          [style.border-bottom-color]="isActive('/user/dangky') ? '#CC7F45' : 'inherit'" 
+          [style.color]="isActive('/user/dangky') ? '#CC7F45' : 'inherit'"
+          routerLink="/user/dangky" 
+          class="btn btn-block">Đăng ký</a>
+        </div>
+    </div>
+    <h2 class="text-center mt-3 mb-3">Đăng ký</h2>
+    <form [formGroup]="form" (ngSubmit)="register()">
+      <div class="form-group">
+        <input type="text" formControlName="name" class="form-control red-bottom-border" placeholder="Tên">
+      </div>
+      <div class="form-group">
+        <input type="email" formControlName="email" class="form-control red-bottom-border" placeholder="Email">
+        <!-- Display error message for email format validation only if the email control is touched -->
+        <small *ngIf="form.get('email')?.touched && form.get('email')?.hasError('email')" class="text-danger">
+          Email không đúng định dạng !
+        </small>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          formControlName="phone"
+          class="form-control red-bottom-border"
+          placeholder="Số điện thoại"
+          pattern="0[0-9]{9}"
+          title="Số điện thoại phải có định dạng đủ 10 số"
+        />
+        <!-- Display error message for phone number format validation -->
+        <small *ngIf="form.get('phone')?.hasError('pattern')" class="text-danger">
+           Phải có định dạng là SỐ (có số 0 ở đầu và đủ 10 số) !
+        </small>
+      </div>
+      <div class="form-group">
+        <input type="password" formControlName="password" class="form-control red-bottom-border" placeholder="Mật khẩu">
+      </div>
+      <button type="submit" class="btn btn-block custom-button" [disabled]="!form.valid">Đăng ký</button>
+    </form>
+  </div>
+  

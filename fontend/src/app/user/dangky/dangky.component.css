@@ -1,0 +1,42 @@
+.header{
+    background: url('../../../assets/img/nền.png') center/cover;
+    text-align: center;
+}
+.header .container{
+    max-width:1000px !important;
+}
+.category-item {
+    
+    max-width: 174px; 
+  }
+
+.custom-img img{
+    border-radius: 50% !important;
+    max-width: 174px; 
+  }
+a{
+  text-decoration: none;
+  color:#000;  
+}
+.category-item:hover .custom-img img {
+  transform: translateY(-15px);
+} 
+.category-item:hover p {
+  color: #CC7F45; 
+}  
+
+.red-bottom-border {
+    border-width: 1px 1px 2px 1px; /* Đặt độ rộng của viền dưới là 2px */
+    border-bottom-color: #CC7F45; /* Đặt màu sắc của viền là đỏ, bạn có thể tùy chỉnh màu sắc tại đây */
+    border-radius: 4px; /* Đặt bo tròn viền là 0 để có viền vuông */
+    margin-bottom: 10px; /* Tăng khoảng cách dưới nếu cần thiết */
+  }
+ button{
+    background-color: #CC7F45;
+    color: aliceblue;
+}
+button:hover{
+    background-color: #CC7F45;
+    color: aliceblue;
+}
+  

@@ -149,5 +149,22 @@ router.get('/api/products', async (req, res) => {
   }
 });
 
+router.get('/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: 'Không tìm thấy sản phẩm' });
+    }
+
+    res.status(200).json(product);
+  } catch (error) {
+    console.error('Lỗi khi lấy thông tin sản phẩm:', error);
+    res.status(500).json({ message: 'Đã có lỗi xảy ra' });
+  }
+});
+
+
 
 module.exports = router;

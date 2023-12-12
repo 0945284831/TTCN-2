@@ -28,6 +28,11 @@ export class TaikhoanComponent implements OnInit {
   selectedProvince: string = '';
   selectedDistrict: string = '';
   selectedWard: string = '';
+  provinceSelected: boolean = false;
+  districtSelected: boolean = false;
+
+  selectedProvinceCode!: string;
+  selectedDistrictCode!: string;
 
   constructor(
     private userService: UserService,
@@ -117,7 +122,7 @@ export class TaikhoanComponent implements OnInit {
       address: [''],
       zipCode: [''],
       isDefault: [''],
-    });
+    }); 
   }
 
   private loadProvinces(): void {
@@ -137,47 +142,64 @@ export class TaikhoanComponent implements OnInit {
   
     // Lưu chỉ name vào biến selectedProvinceName để sử dụng khi cần
     const selectedProvinceName = provinceName;
+  
+    // Enable the district dropdown and disable the ward dropdown
+    this.provinceSelected = true;
+    this.districtSelected = false;
+  
+    // Reset the district and ward selections
+    this.selectedDistrict = '';
+    this.selectedWard = '';
   }
   
-  onDistrictChange(districtCode: string): void {
-    this.addressService.getWardsByDistrict(districtCode).subscribe((data) => {
+  onDistrictChange(): void {
+    const selectedDistrictCode = this.selectedDistrict;
+  
+    // Gửi mã quận/huyện lên API để lấy danh sách phường/xã
+    this.addressService.getWardsByDistrict(selectedDistrictCode).subscribe((data) => {
       this.wards = data.wards;
     });
+  
+    // Enable the ward dropdown
+    this.districtSelected = true;
+    
   }
 
- onSubmit() {
-  console.log('Submit button clicked.');
-  if (this.addressForm.valid) {
-    const contactInfo: ContactInfo = this.addressForm.value;
+  onSubmit() {
+    if (this.addressForm.valid) {
+      // Lấy giá trị từ form
+      const formValue = this.addressForm.value;
 
-    // Kiểm tra xem đó có phải là thông tin liên hệ mới hay cập nhật
-    if (!this.contactInfo._id) {
-      // Lấy userId từ đối tượng user
-      const userId = this.user._id;
+      // Tạo đối tượng ContactInfo từ giá trị form
+      const newContactInfo: ContactInfo = {
+        fullName: formValue.fullName,
+        phone: formValue.phone,
+        address: formValue.address,
+        country: 'Vietnam', // Bạn có thể cung cấp quốc gia theo nhu cầu
+        province: formValue.province,
+        district: formValue.district,
+        ward: formValue.ward,
+        zipCode: formValue.zipCode,
+        isDefault: formValue.isDefault,
+        _id: '', // Để trống hoặc bạn có thể tạo ID duy nhất nếu cần
+      };
 
-      // Lấy provinceName và districtName từ biến selectedProvince và selectedDistrict
-      const [_, provinceName] = this.selectedProvince.split(' ');
-      const [__, districtName] = this.selectedDistrict.split(' ');
-
-      // Gửi thông tin liên hệ mới lên API với cả provinceName và districtName
-      this.userService.addContactInfo(userId, { ...contactInfo, province: provinceName, district: districtName }).subscribe(
+      // Gọi service để thêm địa chỉ mới cho người dùng
+      this.userService.addContactInfo(this.userId, newContactInfo).subscribe(
         (response) => {
-          // Xử lý thành công, nếu cần
-          console.log('Thông tin liên hệ được tạo thành công:', response);
+          console.log('New contact info added successfully:', response);
+          // Thực hiện các hành động cần thiết sau khi thêm địa chỉ
 
-          // Cập nhật contactInfo sau khi thêm thành công
-          this.contactInfo = response.contactInfo;
+          // Đóng dialog
+          this.visible = false;
         },
         (error) => {
-          // Xử lý lỗi, nếu cần
-          console.error('Lỗi khi tạo thông tin liên hệ:', error);
+          console.error('Error adding contact info:', error);
+          // Xử lý lỗi nếu cần thiết
         }
       );
-    } 
-  } else {
-    // Xử lý lỗi kiểm tra hợp lệ của form, nếu cần
+    }
   }
-}
 
   
   

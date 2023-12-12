@@ -27,10 +27,10 @@ export class NewsService {
       .subscribe(
         (response) => {
           // Handle the response as needed
-          console.log('Product added successfully:', response.news);
+          console.log('news added successfully:', response.news);
         },
         (error) => {
-          console.error('Error adding product:', error);
+          console.error('Error adding news:', error);
           // Handle the error, show a message, etc.
         }
       );

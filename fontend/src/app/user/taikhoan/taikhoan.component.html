@@ -37,7 +37,8 @@
       
             <div *ngIf="selectedTab === 'address'">
                 <h2>ĐỊA CHỈ CỦA BẠN</h2>
-                <p-button (click)="showDialog()" icon="pi pi-external-link" label="Thêm địa chỉ"></p-button>
+                <button (click)="showDialog()" icon="pi pi-external-link" class="btn" style=" background-color: #CC7F45; color: aliceblue;">Thêm địa chỉ</button>
+
                 <p></p>
                 <br>
                 <div *ngIf="contactInfo">
@@ -71,23 +72,28 @@
       <div class="row">
         <div class="col-md-4 mt-3">
           <select id="province" formControlName="province" [(ngModel)]="selectedProvince" (change)="onProvinceChange()" class="form-control">
-            <option value="" >Tỉnh thành</option>
-            <option *ngFor="let province of provinces" [value]="province.code + ' ' + province.name">{{ province.name }}</option>
+            <option value="">Chọn Tỉnh/Thành phố</option>
+            <option *ngFor="let province of provinces" [value]="province.code">{{ province.name }}</option>
           </select>
         </div>
-        <div class="col-md-4 mt-3">
-          <select id="district" formControlName="district" [(ngModel)]="selectedDistrict" (change)="onDistrictChange(selectedDistrict)" class="form-control">
-            <option value="">Quận huyện</option>
+        <div class="col-md-4 mt-3" [ngClass]="{ 'faded': !provinceSelected }">
+          <select id="district" formControlName="district" [(ngModel)]="selectedDistrict" (change)="onDistrictChange()" class="form-control">
+            <option value="">Chọn Quận/Huyện</option>
             <option *ngFor="let district of districts" [value]="district.code">{{ district.name }}</option>
           </select>
         </div>
-        <div class="col-md-4 mt-3">
+        <div class="col-md-4 mt-3" [ngClass]="{ 'faded': !districtSelected }">
           <select id="ward" formControlName="ward" [(ngModel)]="selectedWard" class="form-control">
-            <option value="">Phường xã</option>
+            <option value="">Chọn Phường/Xã</option>
             <option *ngFor="let ward of wards" [value]="ward.name">{{ ward.name }}</option>
           </select>
         </div>
       </div>
+      
+      
+      
+      
+      
     
       <div class="row">
         <div class="col-md-12 mt-3">

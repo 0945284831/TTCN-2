@@ -16,4 +16,10 @@
   .vertical-tabs a.selected {
     color: #CC7F45; /* Change the color for the selected tab */
   }
+  .faded {
+    opacity: 0.5; /* hoặc bất kỳ giá trị nào từ 0 đến 1 tùy thuộc vào mức độ mờ bạn muốn */
+    pointer-events: none; /* ngăn chặn sự kiện click vào phần tử bị ẩn */
+  }
+  
+  
   

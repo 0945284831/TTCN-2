@@ -1,4 +1,3 @@
-// address.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -23,6 +22,24 @@ export class AddressService {
 
   getWardsByDistrict(districtCode: string): Observable<any> {
     const apiUrl = `${this.host}d/${districtCode}?depth=2`;
+    return this.http.get(apiUrl);
+  }
+
+  // Thêm phương thức mới để lấy tên của Province
+  getProvinceName(provinceCode: string): Observable<any> {
+    const apiUrl = `${this.host}p/${provinceCode}?depth=1`;
+    return this.http.get(apiUrl);
+  }
+
+  // Thêm phương thức mới để lấy tên của District
+  getDistrictName(districtCode: string): Observable<any> {
+    const apiUrl = `${this.host}d/${districtCode}?depth=1`;
+    return this.http.get(apiUrl);
+  }
+
+  // Thêm phương thức mới để lấy tên của Ward
+  getWardName(wardCode: string): Observable<any> {
+    const apiUrl = `${this.host}w/${wardCode}?depth=1`;
     return this.http.get(apiUrl);
   }
 }

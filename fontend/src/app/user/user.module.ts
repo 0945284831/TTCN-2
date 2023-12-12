@@ -28,6 +28,7 @@ import { PasswordModule } from 'primeng/password';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ChitietsanphamComponent } from './chitietsanpham/chitietsanpham.component';
+import { TintucComponent } from './tintuc/tintuc.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,8 @@ import { ChitietsanphamComponent } from './chitietsanpham/chitietsanpham.compone
     DangkyComponent,
     TaikhoanComponent,
     ChitietsanphamComponent,
+    TintucComponent,
+
   ],
   imports: [
     CommonModule,

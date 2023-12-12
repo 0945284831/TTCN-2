@@ -1,0 +1,36 @@
+<div class="header">
+  <div class="container" style="padding-top: 50px; text-align: center;">
+    <nav aria-label="breadcrumb" style="display: inline-block;">
+      <h2 style="color: #CC7F45;">Tin tức</h2>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+        <li class="breadcrumb-item" style="color: #CC7F45;">Tin tức</li>
+      </ol>
+    </nav>
+
+    <!-- Tin tức -->
+    <div class="row mt-3">
+      <div class="col-12" *ngIf="newsList.length">
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-3 p-2" *ngFor="let news of newsList; let i = index">
+            <div class="p-4 surface-card border-round align-items-start">
+              <div class="d-flex flex-column">
+                <a [routerLink]="['/user/tintuc', news._id]">
+                <img style="width: 300px; height: 250px; object-fit: cover;" class="shadow border-round" [src]="'http://localhost:3000' + news.newsImage" [alt]="news.title" />
+                <div class="font-weight-bold mt-3 product_name" style="height: 60px;">{{ news.title }}</div>
+                </a>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="font-weight-bold">{{ news.publishedAt | date:'dd/MM/yyyy' }}</span>
+                <!-- Thêm sự kiện click nếu cần -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="!newsList.length">
+        <p>Không có tin tức nào hiện tại.</p>
+      </div>
+    </div>
+  </div>
+</div>

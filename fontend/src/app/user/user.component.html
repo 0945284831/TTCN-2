@@ -48,7 +48,7 @@
             </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">TIN TỨC</a>
+          <a class="nav-link" [style.color]="isActive('/user/tintuc') ? '#CC7F45' : 'inherit'" routerLink="tintuc">TIN TỨC</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [style.color]="isActive('/user/cuahang') ? '#CC7F45' : 'inherit'" routerLink="cuahang">CỬA HÀNG</a>

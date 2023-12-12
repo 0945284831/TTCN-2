@@ -9,6 +9,7 @@ const user = require('./routes/user');
 const token = require('./routes/token'); 
 const giohang = require('./routes/giohang'); 
 const donhang = require('./routes/donhang'); 
+const tintuc = require('./routes/tintuc');
 
 require('dotenv').config();
 const app = express();
@@ -38,6 +39,7 @@ app.use(user);
 app.use(token);
 app.use(giohang);
 app.use(donhang);
+app.use(tintuc);
 app.use('/auth', authRoutes);
 
 app.listen(PORT, () => {

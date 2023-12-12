@@ -6,6 +6,8 @@ import { MainCategoryComponent } from './main-category/main-category.component';
 import { SubCategoryComponent } from './sub-category/sub-category.component';
 import { AddProductComponent } from './product/product-add/add-product.component';
 import {ProductListComponent} from'./product/product-list/product-list.component';
+import {TintucComponent} from'./tintuc/tintuc.component';
+import {TintucAddComponent} from'./tintuc/tintuc-add/tintuc-add/tintuc-add.component';
 
 const adminRoutes: Routes = [
   {
@@ -16,6 +18,8 @@ const adminRoutes: Routes = [
       { path: 'sub-category', component: SubCategoryComponent },
       { path: 'products', component: ProductListComponent, },
       { path: 'products/add', component: AddProductComponent, },
+      { path: 'tintuc', component: TintucComponent, },
+      { path: 'tintuc/add-news', component: TintucAddComponent },
     ]
   }
 ];

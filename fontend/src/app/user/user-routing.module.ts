@@ -4,6 +4,7 @@ import { UserComponent } from './user.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { GioithieuComponent } from './gioithieu/gioithieu.component';
 import { LienheComponent } from './lienhe/lienhe.component';
+
 import { HomeComponent } from './home/home.component';
 import { CuahangComponent } from './cuahang/cuahang.component';
 import { DangkyComponent } from './dangky/dangky.component';
@@ -11,8 +12,7 @@ import { DangnhapComponent } from './dangnhap/dangnhap.component';
 import { SanphamComponent } from './sanpham/sanpham.component';
 import { TaikhoanComponent } from './taikhoan/taikhoan.component';
 import { ChitietsanphamComponent } from './chitietsanpham/chitietsanpham.component';
-
-
+import { TintucComponent } from './tintuc/tintuc.component'
 const userRoutes: Routes = [
   {
     path: 'user',
@@ -30,9 +30,7 @@ const userRoutes: Routes = [
       { path: 'dangnhap', component: DangnhapComponent },
       { path: 'dangky', component: DangkyComponent },
       { path: 'taikhoan', component: TaikhoanComponent },
-
-
-
+      { path: 'tintuc', component: TintucComponent },
     ]
   }
 ];

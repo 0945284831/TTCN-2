@@ -20,6 +20,7 @@ import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 import { RatingModule } from 'primeng/rating';
 import { TagModule } from 'primeng/tag';
 import { TintucComponent } from './tintuc/tintuc.component';
+import { NewDetailComponent } from './tintuc/new-detail/new-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { TintucComponent } from './tintuc/tintuc.component';
     CuahangComponent,
     SanphamComponent,
     TintucComponent,
+    NewDetailComponent,
       
   ],
   imports: [

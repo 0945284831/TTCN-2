@@ -21,6 +21,10 @@ export class NewsService {
   getNews(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
+  getNewsDetail(newsId: string): Observable<any> {
+    const url = `${this.apiUrl}/${newsId}`;
+    return this.http.get(url);
+  }
 
   addNews(newsData: FormData) {
     this.http.post<{ news: News }>(this.apiUrl, newsData)

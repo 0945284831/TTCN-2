@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component'
 import { CuahangComponent } from './cuahang/cuahang.component'
 import { SanphamComponent } from './sanpham/sanpham.component'
 import { TintucComponent } from './tintuc/tintuc.component'
+import { NewDetailComponent } from './tintuc/new-detail/new-detail.component'; 
 const userRoutes: Routes = [
   {
     path: 'user',
@@ -19,6 +20,7 @@ const userRoutes: Routes = [
       { path: 'cuahang', component: CuahangComponent },
       { path: 'sanpham', component: SanphamComponent },
       { path: 'tintuc', component: TintucComponent },
+      { path: 'tintuc/:id', component: NewDetailComponent }
     ]
   }
 ];

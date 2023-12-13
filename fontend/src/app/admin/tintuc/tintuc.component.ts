@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./tintuc.component.css']
 })
 export class TintucComponent {
+  pageTitle = 'Danh sách tin tức';
   newsList: any[] = [];
 
   constructor(private newsService: NewsService, private router: Router) {}
@@ -26,5 +27,14 @@ export class TintucComponent {
 
   navigateToAddNews() {
     this.router.navigate(['/admin/tintuc/add-news']);
+  }
+
+  dialogVisibilities: boolean[] = [];
+  showDialog(index: number) {
+    this.dialogVisibilities[index] = true;
+  }
+
+  hideDialog(index: number) {
+    this.dialogVisibilities[index] = false;
   }
 }

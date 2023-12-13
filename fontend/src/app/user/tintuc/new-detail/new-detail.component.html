@@ -1,6 +1,17 @@
-<div class="container">
-    <h2>{{ news?.title }}</h2>
-    <p>{{ news?.content }}</p>
-    <!-- Hiển thị thông tin chi tiết khác -->
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-7">
+      <h3>{{ news.title }}</h3>
+      <div class="d-flex align-items-center">
+        <p class="mr-2 text-muted"><i style="color:#CC7F45" class="pi pi-clock"></i> {{ news.publishedAt | date:'dd-MM-yyyy' }}</p>
+        <p class="text-muted"><i style="color:#CC7F45" class="pi pi-user-edit"></i> {{ news.author }}</p>
+      </div>
+      <img style="width: 600px; height: 600px;" [src]="'http://localhost:3000' + news.newsImage">
+      <div [innerHTML]="news.content"></div>
+    </div>
+    <div class="col-md-5">
+    </div>
+  </div>
+    
   </div>
   

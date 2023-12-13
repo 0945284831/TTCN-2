@@ -31,6 +31,7 @@ import { TagModule } from 'primeng/tag';
 import { DialogModule } from 'primeng/dialog';
 import { TintucComponent } from './tintuc/tintuc.component';
 import { TintucAddComponent } from './tintuc/tintuc-add/tintuc-add/tintuc-add.component';
+import { EditorModule } from 'primeng/editor';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { TintucAddComponent } from './tintuc/tintuc-add/tintuc-add/tintuc-add.co
     RatingModule,
     TagModule,
     DialogModule,
+    EditorModule
   ],
   providers: [ConfirmationService,MessageService],
 })

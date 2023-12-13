@@ -9,6 +9,7 @@ export interface News {
   content: string;
   tags: string;
   newsImage : string[];
+  publishedAt: string;
 }
 @Injectable({
   providedIn: 'root',

@@ -30,6 +30,8 @@ import { ButtonModule } from 'primeng/button';
 import { ChitietsanphamComponent } from './chitietsanpham/chitietsanpham.component';
 import { TintucComponent } from './tintuc/tintuc.component';
 import { NewDetailComponent } from './tintuc/new-detail/new-detail.component';
+import { AccordionModule } from 'primeng/accordion';
+
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import { NewDetailComponent } from './tintuc/new-detail/new-detail.component';
     ToastModule,
     PasswordModule,
     DialogModule,
-    ButtonModule
+    ButtonModule,
+    AccordionModule
   ]
 })
 export class UserModule { }

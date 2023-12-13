@@ -20,6 +20,8 @@ export class TintucAddComponent {
     newsImage: null as File | null  // Added for file upload
   };
 
+  text: string | undefined;
+
   imageDataList: string[] = [];
   uploadedFiles: any[] = [];
   form!: FormGroup;

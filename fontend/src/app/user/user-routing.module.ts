@@ -13,6 +13,7 @@ import { SanphamComponent } from './sanpham/sanpham.component';
 import { TaikhoanComponent } from './taikhoan/taikhoan.component';
 import { ChitietsanphamComponent } from './chitietsanpham/chitietsanpham.component';
 import { TintucComponent } from './tintuc/tintuc.component'
+import { NewDetailComponent } from './tintuc/new-detail/new-detail.component'; 
 const userRoutes: Routes = [
   {
     path: 'user',
@@ -31,6 +32,7 @@ const userRoutes: Routes = [
       { path: 'dangky', component: DangkyComponent },
       { path: 'taikhoan', component: TaikhoanComponent },
       { path: 'tintuc', component: TintucComponent },
+      { path: 'tintuc/:id', component: NewDetailComponent }
     ]
   }
 ];

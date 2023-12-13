@@ -29,6 +29,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ChitietsanphamComponent } from './chitietsanpham/chitietsanpham.component';
 import { TintucComponent } from './tintuc/tintuc.component';
+import { NewDetailComponent } from './tintuc/new-detail/new-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { TintucComponent } from './tintuc/tintuc.component';
     TaikhoanComponent,
     ChitietsanphamComponent,
     TintucComponent,
-
+    NewDetailComponent,
   ],
   imports: [
     CommonModule,

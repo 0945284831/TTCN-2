@@ -63,6 +63,19 @@ router.get('/news', async (req, res) => {
   }
 });
 
+router.get('/news/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const newsDetail = await News.findById(id);
+    if (!newsDetail) {
+      return res.status(404).json({ error: 'Không tìm thấy tin tức' });
+    }
+    res.json(newsDetail);
+  } catch (error) {
+    res.status(500).json({ error: 'Lỗi khi lấy chi tiết tin tức' });
+  }
+});
+
 
 // Route: Xóa tin tức theo ID
 router.delete('/news/:id', async (req, res) => {

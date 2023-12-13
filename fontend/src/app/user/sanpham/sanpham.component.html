@@ -43,24 +43,26 @@
             Sản phẩm đang được cập nhật.
         </div>
       </div>
-<ng-template #productSection>
-    <div class="row">
-        <div class="col-12 col-sm-6 col-lg-3 p-2" *ngFor="let product of products; let i = index">
-          <div class="p-4  surface-card border-round align-items-start">
-            <div class="d-flex flex-column">
-              <!-- Sử dụng routerLink để chuyển đến trang chi tiết sản phẩm với ID tương ứng -->
-              <!-- <a (click)="redirectToProductsId(products[i].productId)"> -->
-                <img style="width: 300px; height: 250px; object-fit: cover;" class="shadow border-round"
-                  [src]="'http://localhost:3000' + product.productImage[0]" [alt]="product.productName" />
-                <div class=" font-weight-bold mt-3 product_name" style="height: 60px;">{{ product.productName }}</div>
-              <!-- </a> -->
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-              <span class=" font-weight-bold" style="color:red;">{{ product.productPrice | number:'1.0-2' }} VND</span>
-            </div>
-          </div>
+<<ng-template #productSection>
+  <div class="row">
+    <div class="col-12 col-sm-6 col-lg-3 p-2" *ngFor="let product of products; let i = index">
+      <div class="p-4 surface-card border-round align-items-start">
+        <div class="d-flex flex-column">
+          <!-- Use routerLink to navigate to the product detail page -->
+          <a [routerLink]="['/user/chitietsanpham', product._id]">
+            <img style="width: 300px; height: 250px; object-fit: cover;"
+                 class="shadow border-round"
+                 [src]="'http://localhost:3000' + product.productImage[0]"
+                 [alt]="product.productName" />
+            <div class="font-weight-bold mt-3 product_name" style="height: 60px;">{{ product.productName }}</div>
+          </a>
         </div>
-      </div>      
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="font-weight-bold" style="color:red;">{{ product.productPrice | number:'1.0-2' }} VND</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-template>
 </div>
 

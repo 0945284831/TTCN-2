@@ -1,1 +1,42 @@
-<p>chitietsanpham works!</p>
+<section style="margin: 20px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div *ngIf="product">
+            <h2 style="margin-bottom: 20px;">{{ product.productName }}</h2>
+    
+            <img *ngFor="let image of product.productImage" [src]="'http://localhost:3000' + product.productImage[0]" alt="{{ product.productName }}" style="width: 100%;">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div *ngIf="product">
+            <p style="margin-bottom: 20px;">Giá: {{ product.productPrice }}₫</p>
+            <p style="margin-bottom: 20px;">Mô tả: {{ product.productDescription }}</p>
+            <p style="margin-bottom: 20px;">Danh mục chính: {{ product.mainCategoryId }}</p>
+            <p style="margin-bottom: 20px;">Danh mục phụ: {{ product.subCategoryId }}</p>
+            <p style="margin-bottom: 20px;">Số lượng: 
+                <button (click)="decreaseQuantity()">-</button>
+                {{ quantity }}
+                <button (click)="increaseQuantity()">+</button>
+              </p>
+            <button type="button" class="btn btn-primary" style="margin-bottom: 20px;">Thêm vào giỏ hàng</button>
+    
+            <ul style="display: flex; flex-direction: column; margin-bottom: 20px;">
+              <h2 style="margin-bottom: 10px;">Các sản phẩm thường được mua kèm</h2>
+              <li><a href="#">Bộ chén dĩa Minh Long</a></li>
+              <li><a href="#">Bộ ấm chén Minh Long</a></li>
+              <li><a href="#">Bộ bát đĩa Minh Long</a></li>
+            </ul>
+    
+            <ul style="display: flex; flex-direction: column;">
+              <h2 style="margin-bottom: 10px;">Cam kết</h2>
+              <li><img src="image/icon-free-ship.png" alt="Miễn phí giao hàng"> Miễn phí giao hàng</li>
+              <li><img src="image/icon-chinh-hang.png" alt="Cam kết hàng chính hãng"> Cam kết hàng chính hãng 100%</li>
+              <li><img src="image/icon-tra-hang.png" alt="Đổi trả 7 ngày"> Đổi trả 7 ngày</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

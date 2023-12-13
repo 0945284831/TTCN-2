@@ -32,7 +32,8 @@ const userRoutes: Routes = [
       { path: 'dangky', component: DangkyComponent },
       { path: 'taikhoan', component: TaikhoanComponent },
       { path: 'tintuc', component: TintucComponent },
-      { path: 'tintuc/:id', component: NewDetailComponent }
+      { path: 'tintuc/:id', component: NewDetailComponent },
+      { path: 'chitietsanpham/:id', component: ChitietsanphamComponent },
     ]
   }
 ];

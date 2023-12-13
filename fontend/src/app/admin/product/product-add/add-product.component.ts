@@ -19,6 +19,7 @@ interface UploadEvent {
 })
 export class AddProductComponent implements OnInit {
   productData: Product = {
+    _id:'',
     productName: '',
     productDescription: '',
     productPrice: 0,

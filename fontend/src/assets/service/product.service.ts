@@ -5,7 +5,10 @@ import { Observable } from 'rxjs';
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 
+
 export interface Product {
+  // productId: string;
+  _id: string;
   productName: string;
   productDescription: string;
   productPrice: number;

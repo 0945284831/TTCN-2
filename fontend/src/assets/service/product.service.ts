@@ -51,6 +51,11 @@ export class ProductService {
     const productUrl = `${this.url}/${productId}`;
     return this.http.get<Product>(productUrl);
   }
+
+  getProductImages(productId: string): Observable<{ images: string[] }> {
+    const imageUrl = `${this.url}/product/images/${productId}`;
+    return this.http.get<{ images: string[] }>(imageUrl);
+  }
 }
 
 

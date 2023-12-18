@@ -5,7 +5,7 @@
         <div class="col-md-4">
           <div class="vertical-tabs">
             <h2>TRANG TÀI KHOẢN</h2>
-            <b>Xin chào,</b><b style="color:red"> {{ user.name }} </b><b>!</b>
+            <b>Xin chào,</b><b style="color:red" *ngIf="user"> {{ user.name }} </b><b>!</b>
             <p></p> 
            
             <div>
@@ -15,7 +15,7 @@
                 <a (click)="showOrders()" [class.selected]="selectedTab === 'orders'">Đơn hàng của bạn</a>
             </div>
             <div>
-                <a (click)="showAddress()" [class.selected]="selectedTab === 'address'">Sổ địa chỉ ({{ user.contactInfo.length }})</a>
+                <a (click)="showAddress()" [class.selected]="selectedTab === 'address'" *ngIf="user">Sổ địa chỉ ({{ user.contactInfo.length }})</a>
             </div>
           </div>
         </div>
@@ -26,9 +26,9 @@
             <div *ngIf="selectedTab === 'info'">
                 <h2>THÔNG TIN TÀI KHOẢN</h2>
                 <p></p>
-                  <p><strong>Email:</strong> {{ user.email }}</p>
-                  <p><strong>Số Điện Thoại:</strong> {{ user.phone }}</p>
-                  <p><strong>Họ và Tên:</strong> {{ user.name }}</p>
+                  <p *ngIf="user"><strong>Email:</strong> {{ user.email }}</p>
+                  <p *ngIf="user"><strong>Số Điện Thoại:</strong> {{ user.phone }}</p>
+                  <p *ngIf="user"><strong>Họ và Tên:</strong> {{ user.name }}</p>
             </div>
       
             <div *ngIf="selectedTab === 'orders'">
@@ -56,7 +56,7 @@
     </div>
   </div>
   <p-dialog header="THÊM ĐỊA CHỈ MỚI" [(visible)]="visible" [modal]="true" [style]="{ width: '60vw' }" [draggable]="false" [resizable]="false">
-    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="container mt-3">
+    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="container mt-3" *ngIf="contactInfo">
       <div class="row">
         <div class="col-md-12 mt-3">
           <input type="text" id="fullName" formControlName="fullName" [(ngModel)]="contactInfo.fullName" class="form-control" placeholder="Họ và tên">

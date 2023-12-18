@@ -1,0 +1,49 @@
+.navigation {
+    display: flex;
+  }
+  
+  .navigation a {
+    text-decoration: none;
+    padding: 10px;
+    margin: 0 10px;
+    cursor: pointer;
+    color:black
+  }
+  
+  .navigation a.active {
+    border-bottom: 2px solid #CC7F45;
+    color: #CC7F45; /* hoặc màu sắc bạn muốn */
+  }
+  
+  .content {
+    margin-top: 20px;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  .inStock {
+    color: #CC7F45; 
+  }
+
+  .custom-tieude img {
+    max-width: 25px;
+    max-height: 25px;
+    margin-right: 10px;
+}
+
+  :host ::ng-deep .p-inputnumber-button {
+    background-color:#CC7F45;
+  }
+  

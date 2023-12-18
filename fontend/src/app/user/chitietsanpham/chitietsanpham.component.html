@@ -3,40 +3,103 @@
       <div class="row">
         <div class="col-md-6">
           <div *ngIf="product">
-            <h2 style="margin-bottom: 20px;">{{ product.productName }}</h2>
-    
-            <img *ngFor="let image of product.productImage" [src]="'http://localhost:3000' + product.productImage[0]" alt="{{ product.productName }}" style="width: 100%;">
+            <img [src]="'http://localhost:3000' + product.productImage[0]" alt="{{ product.productName }}" style="width: 100%;">
           </div>
-        </div>
+          
+          </div>
+        
         <div class="col-md-6">
           <div *ngIf="product">
-            <p style="margin-bottom: 20px;">Giá: {{ product.productPrice }}₫</p>
-            <p style="margin-bottom: 20px;">Mô tả: {{ product.productDescription }}</p>
-            <p style="margin-bottom: 20px;">Danh mục chính: {{ product.mainCategoryId }}</p>
-            <p style="margin-bottom: 20px;">Danh mục phụ: {{ product.subCategoryId }}</p>
-            <p style="margin-bottom: 20px;">Số lượng: 
-                <button (click)="decreaseQuantity()">-</button>
-                {{ quantity }}
-                <button (click)="increaseQuantity()">+</button>
-              </p>
-            <button type="button" class="btn btn-primary" style="margin-bottom: 20px;">Thêm vào giỏ hàng</button>
+            <h2 style="margin-bottom: 10px;">{{ product.productName }}</h2>
+            <p>
+              Tình trạng:
+              <span *ngIf="product.productQuantity > 0; else outOfStock" class="inStock">Còn hàng</span>
+              <ng-template #outOfStock>Hết hàng</ng-template>
+            </p>
+            <hr>
+            <h2 style="margin-bottom: 20px; color:#CC7F45;">{{ product.productPrice | number:'1.0-2' }} VND</h2>
+            <hr>
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+              <p class="" for="minmax-buttons">Số lượng:</p>
+                <p-inputNumber
+                  [(ngModel)]="quantity"
+                  
+                  [showButtons]="true"
+                  buttonLayout="horizontal"
+                  spinnerMode="horizontal"
+                  inputId="horizontal"
+                  class="custom-input-number"
+                  decrementButtonClass="p-button-secondary"
+                  incrementButtonClass="p-button-secondary"
+                  incrementButtonIcon="pi pi-plus"
+                  decrementButtonIcon="pi pi-minus"
+                ></p-inputNumber>
+
+                <button type="button" class="btn" style="background-color: #CC7F45; color: aliceblue;" (click)="addToCart()">Thêm vào giỏ hàng</button>
+
+            </div>
+            
     
-            <ul style="display: flex; flex-direction: column; margin-bottom: 20px;">
-              <h2 style="margin-bottom: 10px;">Các sản phẩm thường được mua kèm</h2>
-              <li><a href="#">Bộ chén dĩa Minh Long</a></li>
-              <li><a href="#">Bộ ấm chén Minh Long</a></li>
-              <li><a href="#">Bộ bát đĩa Minh Long</a></li>
-            </ul>
-    
-            <ul style="display: flex; flex-direction: column;">
-              <h2 style="margin-bottom: 10px;">Cam kết</h2>
-              <li><img src="image/icon-free-ship.png" alt="Miễn phí giao hàng"> Miễn phí giao hàng</li>
-              <li><img src="image/icon-chinh-hang.png" alt="Cam kết hàng chính hãng"> Cam kết hàng chính hãng 100%</li>
-              <li><img src="image/icon-tra-hang.png" alt="Đổi trả 7 ngày"> Đổi trả 7 ngày</li>
-            </ul>
+              <div class="row custom-tieude">
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <img src="../../../assets/img/chinhsach_1.png" alt="Miễn phí giao hàng">
+                    <p>Miễn phí giao hàng</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <img src="../../../assets/img/chinhsach_2.png" alt="Cam kết hàng chính hãng">
+                    <p>Cam kết hàng chính hãng 100%</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <img src="../../../assets/img/chinhsach_3.png" alt="Đổi trả 7 ngày">
+                    <p>Đổi trả 7 ngày</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-center">
+                    <img src="../../../assets/img/chinhsach_4.png" alt="Mở hộp kiểm nha nhận hàng">
+                    <p>Mở hộp kiểm nha nhận hàng</p>
+                  </div>
+                </div>
+              </div>
+            
           </div>
         </div>
       </div>
+      <div class="navigation">
+        <a  (click)="showContent('productDescription')" [class.active]="activeTab === 'productDescription'">Mô tả sản phẩm</a>
+        <a (click)="showContent('purchaseGuide')" [class.active]="activeTab === 'purchaseGuide'">Hướng dẫn mua hàng</a>
+      </div>
+      
+      <div class="content" *ngIf="activeTab === 'productDescription'">
+        <p *ngIf="product">{{ product.productDescription }}</p>
+      </div>
+      
+      <div class="content" *ngIf="activeTab === 'purchaseGuide'">
+        <p><strong>Bước 1:</strong> Truy cập website và lựa chọn sản phẩm cần mua</p>
+  <p><strong>Bước 2:</strong> Click vào sản phẩm muốn mua, màn hình hiển thị pop-up với các lựa chọn sau</p>
+  <ul>
+    <li>Nếu bạn muốn tiếp tục mua hàng: Bấm vào phần "Tiếp tục mua hàng" để thêm sản phẩm vào giỏ hàng</li>
+    <li>Nếu bạn muốn xem giỏ hàng để cập nhật sản phẩm: Bấm vào "Xem giỏ hàng"</li>
+    <li>Nếu bạn muốn đặt hàng và thanh toán: Bấm vào "Đặt hàng và thanh toán"</li>
+  </ul>
+  <p><strong>Bước 3:</strong> Lựa chọn thông tin tài khoản thanh toán</p>
+  <ul>
+    <li>Nếu bạn đã có tài khoản, nhập thông tin tên đăng nhập (email) và mật khẩu vào mục "Đã có tài khoản"</li>
+    <li>Nếu bạn chưa có tài khoản và muốn đăng ký, điền thông tin cá nhân để đăng ký tài khoản</li>
+    <li>Nếu bạn muốn mua hàng không cần tài khoản, nhấp chuột vào "Đặt hàng không cần tài khoản"</li>
+  </ul>
+  <p><strong>Bước 4:</strong> Điền thông tin nhận đơn hàng, chọn hình thức thanh toán và vận chuyển</p>
+  <p><strong>Bước 5:</strong> Xem lại thông tin đặt hàng, điền chú thích và gửi đơn hàng</p>
+  <p>Sau khi nhận được đơn hàng, chúng tôi sẽ liên hệ để xác nhận lại đơn hàng và địa chỉ của bạn.</p>
+  <p>Trân trọng cảm ơn.</p>
+        
+      </div>
     </div>
   </section>
+  
   

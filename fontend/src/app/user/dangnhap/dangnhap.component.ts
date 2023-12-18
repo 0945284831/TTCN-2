@@ -113,12 +113,6 @@ export class DangnhapComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
   
-  
-
-  
-  
-  
-
   isActive(route: string): boolean {
     return this.router.isActive(route, true);
   }

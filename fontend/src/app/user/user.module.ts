@@ -31,6 +31,9 @@ import { ChitietsanphamComponent } from './chitietsanpham/chitietsanpham.compone
 import { TintucComponent } from './tintuc/tintuc.component';
 import { NewDetailComponent } from './tintuc/new-detail/new-detail.component';
 import { AccordionModule } from 'primeng/accordion';
+import { GalleriaModule } from 'primeng/galleria';
+import {InputNumberModule} from 'primeng/inputnumber';
+import { OrderListModule } from 'primeng/orderlist';
 
 
 @NgModule({
@@ -67,7 +70,10 @@ import { AccordionModule } from 'primeng/accordion';
     PasswordModule,
     DialogModule,
     ButtonModule,
-    AccordionModule
+    AccordionModule,
+    GalleriaModule,
+    InputNumberModule,
+    OrderListModule
   ]
 })
 export class UserModule { }

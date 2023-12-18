@@ -64,7 +64,6 @@ export class AuthService {
   }
 
   getUserId(): string | null {
-    // Get userId from localStorage
     return localStorage.getItem('_id');
   }
   

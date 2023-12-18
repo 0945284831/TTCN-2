@@ -77,7 +77,30 @@
       </div>
       
       <i><a class="pi pi-heart text-decoration-none"></a></i>
-      <i><a class="pi pi-shopping-bag text-decoration-none"></a></i>
+      <i (mouseover)="showShoppingCart()" class="pi pi-shopping-bag text-decoration-none"></i>
+          
+          <div *ngIf="isCartVisible">
+            <p-orderList [value]="shoppingCart.items" [listStyle]="{ height: '25rem' }" header="Shopping Cart">
+              <ng-template let-item pTemplate="item">
+                <div class="flex flex-wrap p-2 align-items-center gap-3">
+                  <img src="{{ item.product.productImage[0] }}" [alt]="item.product.productName" class="w-4rem shadow-2 flex-shrink-0 border-round" />
+                  <div class="flex-1 flex flex-column gap-2">
+                    <span class="font-bold">{{ item.product.productName }}</span>
+                    <div class="flex align-items-center gap-2">
+                      <i class="pi pi-tag text-sm"></i>
+                      <span>{{ item.quantity }}</span>
+                    </div>
+                  </div>
+                  <span class="font-bold text-900">{{ '$' + (item.product.productPrice * item.quantity) }}</span>
+                </div>
+              </ng-template>
+            </p-orderList>
+          
+            <div *ngIf="!shoppingCart || shoppingCart.items.length === 0">
+              <p>Your shopping cart is empty.</p>
+            </div>
+          </div>
+
     </form>
   </div>
 </nav>

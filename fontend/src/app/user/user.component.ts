@@ -5,6 +5,8 @@ import { MainCategoryService, MainCategory } from '../../assets/service/main-cat
 import { SubCategoryService, SubCategory } from '../../assets/service/sub-category.service';
 import { AuthService } from '../../assets/service/auth.service';
 import { ShoppingCart, ShoppingCartItem, ShoppingCartService } from '../../assets/service/giohang.service'
+import { OrderService } from '../../assets/service/donhang.service';
+import { ProductService, Product } from "../../assets/service/product.service";
 
 
 @Component({
@@ -18,16 +20,30 @@ export class UserComponent implements OnInit {
   selectedMainCategory!: MainCategory;
   subCategories: SubCategory[] = [];
 
-  shoppingCart!: ShoppingCart;
+  shoppingCart: ShoppingCart | undefined;
   shoppingCartItem!:ShoppingCartItem
   isCartVisible = false;
-  
+
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
+  searchTerm: string = '';
+
+  sidebarVisible: boolean = false;
+
+  private _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+
   constructor(
     private router: Router,
     private mainCategoryService: MainCategoryService,
     private subCategoryService: SubCategoryService,
     private authService: AuthService,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private orderService: OrderService,
+    private productService: ProductService
+
   ) {}
 
 
@@ -36,7 +52,26 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.loadMainCategories();
+
+    this.productService.getProducts().subscribe(
+      (data: Product[]) => {
+        this.products = data;
+        this.filteredProducts = data; // Khởi tạo filteredProducts ban đầu
+      },
+      (error) => {
+        console.error('Error fetching products:', error);
+      }
+    );
   }
+
+  search(): void {
+    this.filteredProducts = this.products.filter(product =>
+      product.productName.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+  
+
+  
 
   isLoggedIn(): boolean {
     // Gọi phương thức từ AuthService để kiểm tra trạng thái đăng nhập
@@ -121,15 +156,55 @@ export class UserComponent implements OnInit {
 
   showShoppingCart() {
     // Gọi service để lấy thông tin giỏ hàng
-    this.shoppingCartService.getShoppingCartByUserId('userId').subscribe(
-      (cart: ShoppingCart) => {
-        this.shoppingCart = cart;
-        this.isCartVisible = true; // Hiển thị giỏ hàng khi di chuột qua nút mua sắm
+    const userId = this.authService.getUserId();
+  
+    if (userId !== null) {
+      this.shoppingCartService.getShoppingCartByUserId(userId).subscribe(
+        (cart: ShoppingCart) => {
+          this.shoppingCart = cart;
+          this.isCartVisible = true; // Hiển thị giỏ hàng khi di chuột qua nút mua sắm
+        },
+        (error) => {
+          console.error('Error loading shopping cart:', error);
+        }
+      );
+    } else {
+      console.error('User ID is null');
+    }
+  }
+  
+  
+  
+  hideShoppingCart() {
+    this.isCartVisible = false;
+  }
+
+  handleThanhToan() {
+    // Get the userId from AuthService
+    const userId = this.authService.getUserId();
+
+    // Check if the user is logged in
+    if (!userId) {
+      console.error('User is not logged in.');
+      // Handle the case where the user is not logged in (redirect to login, show a message, etc.)
+      return;
+    }
+
+    // Call the createOrder method from OrderService
+    this.orderService.createOrder(userId).subscribe(
+      (response) => {
+        console.log('Order created successfully:', response);
+        // Add any additional logic or UI updates here
       },
       (error) => {
-        console.error('Error loading shopping cart:', error);
+        console.error('Error creating order:', error);
+        // Handle errors (show an error message, log the error, etc.)
       }
     );
+  }
+
+  get totalQuantity(): number {
+    return this.shoppingCart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
   }
 
   

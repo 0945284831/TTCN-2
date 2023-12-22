@@ -1,0 +1,11 @@
+.container{
+    max-width: 1224pxs;
+}
+.custom-button1{
+    background-color :#357ebd; 
+    color: aliceblue;
+}
+.custom-button1:hover{
+    background-color :#2a6395; 
+    color: aliceblue;
+}

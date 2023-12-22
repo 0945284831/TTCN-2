@@ -43,8 +43,13 @@ export class AuthService {
   }
   
   logout(): Observable<any> {
-    // Remove login status from localStorage on logout
+    // Remove login status and userId from localStorage on logout
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('_id');
+
+    // Add additional logic here to reset any other data if needed
+
+    // Perform the actual logout by making a request to the server
     return this.http.post(`${this.baseUrl}/logout`, {});
   }
 

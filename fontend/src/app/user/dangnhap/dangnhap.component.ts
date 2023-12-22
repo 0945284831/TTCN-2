@@ -75,7 +75,13 @@ export class DangnhapComponent implements OnInit {
           if (response.success) {
             if (response.isAdmin) {
               // Redirect to the admin page if the user is an admin
-              this.router.navigate(['/admin']);
+              this.router.navigate(['/admin']).then(() => {
+                // Save the login status
+                this.authService.setLoginStatus(true);
+  
+                // Call the showSuccess method
+                this.showSuccess();
+              });
             } else {
               // Redirect to the user home page if the user is not an admin
               this.router.navigate(['/user/home']).then(() => {
@@ -89,7 +95,7 @@ export class DangnhapComponent implements OnInit {
           } else {
             // Handle unsuccessful login
             console.error('Login unsuccessful:', response.message);
-            
+  
             // Call the showError method
             this.showError(response.message);
   
@@ -108,6 +114,7 @@ export class DangnhapComponent implements OnInit {
       );
     }
   }
+  
   
   showError(message: string) {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });

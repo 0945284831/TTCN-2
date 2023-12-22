@@ -33,7 +33,13 @@ import { NewDetailComponent } from './tintuc/new-detail/new-detail.component';
 import { AccordionModule } from 'primeng/accordion';
 import { GalleriaModule } from 'primeng/galleria';
 import {InputNumberModule} from 'primeng/inputnumber';
-import { OrderListModule } from 'primeng/orderlist';
+import { BadgeModule } from 'primeng/badge';
+import { ChitietdonhangComponent } from './chitietdonhang/chitietdonhang.component';
+import { ThanhtoanComponent } from './thanhtoan/thanhtoan.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { ImageModule } from 'primeng/image';
+
+
 
 
 @NgModule({
@@ -50,6 +56,8 @@ import { OrderListModule } from 'primeng/orderlist';
     ChitietsanphamComponent,
     TintucComponent,
     NewDetailComponent,
+    ChitietdonhangComponent,
+    ThanhtoanComponent,
   ],
   imports: [
     CommonModule,
@@ -73,7 +81,11 @@ import { OrderListModule } from 'primeng/orderlist';
     AccordionModule,
     GalleriaModule,
     InputNumberModule,
-    OrderListModule
+    BadgeModule,
+    SidebarModule,
+    ImageModule 
+    
+   
   ]
 })
 export class UserModule { }

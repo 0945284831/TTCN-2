@@ -82,6 +82,7 @@ export class ChitietsanphamComponent implements OnInit {
         const productId = this.product._id;
         const quantity = this.quantity;
         const userId = this.authService.getUserId();
+        this.shoppingCartService.updateTotalQuantity();
       
         if (productId && quantity && userId) {
           this.shoppingCartService.addToCart(userId, productId, quantity).subscribe(

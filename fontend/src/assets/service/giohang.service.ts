@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { Product } from './product.service';
 
 export interface ShoppingCart {
   user: string;
@@ -10,7 +11,7 @@ export interface ShoppingCart {
 }
 
 export interface ShoppingCartItem {
-  product: string;
+  product: Product;
   quantity: number;
 }
 
@@ -18,6 +19,7 @@ export interface ShoppingCartItem {
   providedIn: 'root'
 })
 export class ShoppingCartService {
+  private totalQuantity$ = new BehaviorSubject<number>(0);
   private shoppingCart: ShoppingCart = { user: '', items: [], totalAmount: 0 };
   private shoppingCart$ = new BehaviorSubject<ShoppingCart>({ user: '', items: [], totalAmount: 0 });
 
@@ -56,11 +58,25 @@ export class ShoppingCartService {
   getShoppingCartByUserId(userId: string): Observable<ShoppingCart> {
     const getCartUrl = `${this.url}/get-cart/${userId}`;
 
-    return this.http.get<ShoppingCart>(getCartUrl).pipe(
-      tap((response) => {
-        this.shoppingCart = response;
+    return this.http.get<any>(getCartUrl).pipe(
+      map((response) => ({
+        user: response.shoppingCart.user,
+        items: response.shoppingCart.items,
+        totalAmount: response.shoppingCart.totalAmount
+      })),
+      tap((mappedResponse) => {
+        this.shoppingCart = mappedResponse;
         this.shoppingCart$.next(this.shoppingCart);
       })
     );
+  }
+  
+  get totalQuantity(): number {
+    return this.shoppingCart.items.reduce((total, item) => total + item.quantity, 0);
+  }
+
+  updateTotalQuantity(): void {
+    const totalQuantity = this.shoppingCart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
+    this.totalQuantity$.next(totalQuantity);
   }
 }

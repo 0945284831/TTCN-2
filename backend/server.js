@@ -37,8 +37,8 @@ app.use(subCategoryRoutes);
 app.use(productRoutes);
 app.use(user);
 app.use(token);
-app.use(giohang);
-app.use(donhang);
+app.use('/api/giohang', giohang);
+app.use('/api/donhang',donhang);
 app.use(tintuc);
 app.use('/auth', authRoutes);
 

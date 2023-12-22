@@ -14,11 +14,15 @@ import { TaikhoanComponent } from './taikhoan/taikhoan.component';
 import { ChitietsanphamComponent } from './chitietsanpham/chitietsanpham.component';
 import { TintucComponent } from './tintuc/tintuc.component'
 import { NewDetailComponent } from './tintuc/new-detail/new-detail.component'; 
+import { ChitietdonhangComponent } from './chitietdonhang/chitietdonhang.component';
+import { ThanhtoanComponent } from './thanhtoan/thanhtoan.component';
+
 const userRoutes: Routes = [
   {
     path: 'user',
     component: UserComponent,
     children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'gioithieu', component: GioithieuComponent },
       { path: 'lienhe', component: LienheComponent },
@@ -34,6 +38,9 @@ const userRoutes: Routes = [
       { path: 'tintuc', component: TintucComponent },
       { path: 'tintuc/:id', component: NewDetailComponent },
       { path: 'chitietsanpham/:id', component: ChitietsanphamComponent },
+      { path: 'chitietdonhang', component: ChitietdonhangComponent },
+      { path: 'thanhtoan', component: ThanhtoanComponent },
+
     ]
   }
 ];

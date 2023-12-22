@@ -109,4 +109,31 @@ router.post('/remove-from-cart', async (req, res) => {
   }
 });
 
+router.get('/get-cart/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Kiểm tra xem người dùng có tồn tại không
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(400).json({ success: false, message: 'Người dùng không tồn tại' });
+    }
+
+    // Kiểm tra xem giỏ hàng của người dùng đã được tạo chưa
+    const shoppingCart = await ShoppingCart.findOne({ user: userId }).populate('items.product');
+
+    // Nếu giỏ hàng không tồn tại, tạo mới
+    if (!shoppingCart) {
+      const newShoppingCart = new ShoppingCart({ user: userId, items: [] });
+      await newShoppingCart.save();
+      return res.json({ success: true, shoppingCart: newShoppingCart });
+    }
+
+    res.json({ success: true, shoppingCart });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 module.exports = router;

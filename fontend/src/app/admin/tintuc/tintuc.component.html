@@ -22,10 +22,9 @@
           <tr *ngFor='let news of newsList; let i = index'>
             <td>
               <img
-                *ngIf="news.img"
-                [src]="news.img"
+                [src]="'http://localhost:3000' + news.newsImage"
                 alt="News Image"
-                style="width: 100px; height: auto;"
+                style="width: 100px; height: 80px;"
               />
             </td>
             <td>{{ news.title }}</td>

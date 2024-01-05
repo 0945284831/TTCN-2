@@ -27,8 +27,3 @@ a{
 .category-item:hover p {
   color: #CC7F45; 
 }  
-
-.link-unstyled {
-    text-decoration: none;
-    color: black;
-}

@@ -21,6 +21,10 @@
       <a class="nav-link text-white text-center" [ngClass]="{' bg-danger': isActive('/admin/tintuc')}" routerLink="/admin/tintuc">
         Tin Tức
       </a>
+      <hr class="text-white">
+      <a class="nav-link text-white text-center" [ngClass]="{' bg-danger': isActive('/admin/donhang')}" routerLink="/admin/donhang">
+        Đơn Hàng
+      </a>
     </div>  
     <hr class="text-white">
   </div>
@@ -29,9 +33,14 @@
   <div class="flex-grow-1" style="margin-left: 280px;">
     <!-- Thanh header -->
     <header class="text-center py-2 mb-3 bg-dark text-white" style="z-index: 1; position: relative;">
-      <!-- Nội dung thanh header -->
-      <h1>Quản Lý web bán hàng</h1>
-    </header>
+      <div class="container d-flex justify-content-between align-items-center">
+          <h1 class="m-0">Quản Lý web bán hàng</h1>
+          <a (click)="logout()" routerLink="/user/home" class="ml-auto"><i class="pi pi-sign-out"></i></a>
+      </div>
+  </header>
+  
+  
+  
 
     <router-outlet></router-outlet>
   </div>

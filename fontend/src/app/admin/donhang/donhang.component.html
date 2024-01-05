@@ -1,0 +1,124 @@
+<!-- Filter by Date -->
+<div class="ml-4">
+<div class="row">
+    <div class="col-md-6">
+      <!-- Filter by Date -->
+      <div class="mb-3">
+        <label for="filterDate" class="form-label">Ngày đặt hàng:</label>
+        <input type="date" id="filterDate" class="form-control" [(ngModel)]="filterDate" (change)="filterOrdersByDate()">
+      </div>
+    </div>
+  
+    <div class="col-md-6">
+      <!-- Filter by Status -->
+      <div class="mb-3">
+        <label for="filterStatus" class="form-label">Trạng thái:</label>
+        <select id="filterStatus" class="form-select" [(ngModel)]="selectedStatusFilter" (change)="filterOrders()">
+          <option value="">Tất cả</option>
+          <option *ngFor="let status of orderStatusOptions" [value]="status">{{ status }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-md-3">
+      <label for="filterPhone">Lọc theo số điện thoại khách hàng:</label>
+      <input type="text"
+       [(ngModel)]="filterPhone"
+       class="form-control"
+       type="number"
+       id="filterPhone"
+       (ngModelChange)="filteredOrders()"
+       pattern="0[0-9]*"
+       inputmode="numeric"
+       minlength="10"
+       #phoneInput="ngModel"
+>
+
+      <div *ngIf="phoneInput.invalid && (phoneInput.dirty || phoneInput.touched)">
+        <div *ngIf="phoneInput.errors?.['pattern']" style="color: red;">Ở đầu phải là số 0</div>
+        <div *ngIf="phoneInput.errors?.['minlength']" style="color: red;">Phải nhập ít nhất 10 số.</div>
+      </div>
+
+      
+
+    </div>
+  </div>
+  
+
+  
+
+<div *ngIf="orders.length > 0; else noOrders">
+    <table class="table table-bordered mt-5">
+      <thead>
+        <tr>
+          <th class="text-center">Đơn Hàng</th>
+          <th class="text-center">Ngày tạo</th>
+          <th class="text-center">Thông tin nhận hàng</th>
+          <th class="text-center">Tổng giá trị</th>
+          <th class="text-center">Trạng thái</th>
+          <th class="text-center">Sản phẩm</th>
+          <th class="text-center">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders ; let i = index">
+          <td class="text-center">{{ i + 1 }}</td>
+          <td class="text-center" style="white-space: nowrap;">{{ order.createdAt | date:'dd/MM/yyyy' }}</td>
+          <td class="text-center">
+            <div>
+                <p>Tên: {{ order.shippingAddress[0].fullName }}</p>
+                <p>SĐT: {{ order.shippingAddress[0].phone }}</p>
+                <p>Địa chỉ: {{ getOrderShippingAddress(order) | json }}</p>
+            </div> 
+        </td>
+          <td class="text-center">{{ order.totalAmount |number:'1.0-2'}} ₫</td>
+          <td class="text-center">{{ order.status }}</td>
+          <td class="text-center">
+            
+                <button class="btn btn-primary" (click)="showDialog()" label="Show">Xem sản phẩm</button>
+                <p-dialog header="Sản Phẩm" [(visible)]="visible" [style]="{width: '30vw'}">
+                    <div *ngFor="let item of order.items">
+                        <div *ngIf="item.productDetails">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <img  
+                                    [src]="'http://localhost:3000' +  item.productDetails.productImage[0]"
+                                    [title]=' item.productDetails.productName'
+                                    style="width: 80px; height:50px; margin-right: 10px;">
+                                <div>
+                                    <p><strong>{{ item.productDetails.productName }}</strong></p>
+                                    <p>Số lượng: <b style="color: #CC7F45;">{{ item.quantity }}</b></p>
+                                    <p>Mã sản phâm <b style="color: #CC7F45;">{{ item.quantity }}</b></p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </p-dialog>
+            
+          </td>
+          <td class="text-center">
+            <select class="form-select" [(ngModel)]="order.selectedStatus">
+              <option *ngFor="let status of orderStatusOptions" [value]="status">{{ status }}</option>
+            </select>
+            
+            <button class="btn btn-success mt-3" (click)="changeOrderStatus(order)" [disabled]="order.status === 'Giao thành công' || order.status === 'Hủy'">Thay đổi trạng thái</button>
+          </td>          
+        </tr>
+      </tbody>
+    </table>
+    <!-- Thêm nút xuất file Excel -->
+<button class="btn btn-success mt-3" (click)="exportToExcel()">Xuất Excel</button>
+
+  </div>
+  
+  <div class="d-flex align-items-center justify-content-center vh-100">
+    <ng-template #noOrders>
+      <div class="mt-5 d-flex align-items-center justify-content-center ">
+        <p>Không có đơn hàng nào.</p>
+      </div>
+    </ng-template>
+  </div>
+  
+</div>

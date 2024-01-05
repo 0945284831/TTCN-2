@@ -32,6 +32,7 @@ import { DialogModule } from 'primeng/dialog';
 import { TintucComponent } from './tintuc/tintuc.component';
 import { TintucAddComponent } from './tintuc/tintuc-add/tintuc-add/tintuc-add.component';
 import { EditorModule } from 'primeng/editor';
+import { DonhangComponent } from './donhang/donhang.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { EditorModule } from 'primeng/editor';
     ProductListComponent,
     TintucComponent,
     TintucAddComponent,
+    DonhangComponent,
     
   ],
   imports: [

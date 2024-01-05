@@ -1,0 +1,33 @@
+<div class="header">
+  <div class="container" style="padding-top: 50px; text-align: center;">
+      <nav aria-label="breadcrumb" style="display: inline-block;">
+          <h2 style=" color: #CC7F45;">Giới Thiệu</h2>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item" style=" color: #CC7F45;" >Giới Thiệu</li>
+          </ol>
+      </nav>
+      
+      <p-carousel [value]="subCategories" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+          <ng-template let-subCategories pTemplate="item">
+              <a class="m-2 text-center py-3 px-5 category-item">
+                  <div class="mb-1 custom-img">
+                      <img class="" [src]="subCategories.imageUrl" [alt]="subCategories.title">
+                  </div>
+                  <div>
+                      <p class="mb-1 mt-3">{{ subCategories.title }}</p>
+                  </div>
+              </a>
+          </ng-template>
+      </p-carousel>
+  </div>
+</div>
+<div class="container">
+    <div class="card p-4">
+      <div class="card-body text-center">
+        <h5 class="text-success font-weight-bold">Đặt hàng thành công!</h5>
+        <p class="text-muted">Hàng của bạn đang được xử lý bên cửa hàng. Vui lòng chờ 3-5 ngày để nhận hàng.</p>
+        <a style="color:#357ebd" class="pi pi-angle-left" routerLink="/user/taikhoan">Xem tình trạng đơn hàng</a>
+    </div>
+    </div>
+  </div>

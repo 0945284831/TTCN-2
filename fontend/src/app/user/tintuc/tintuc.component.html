@@ -1,14 +1,30 @@
+
 <div class="header">
   <div class="container" style="padding-top: 50px; text-align: center;">
-    <nav aria-label="breadcrumb" style="display: inline-block;">
-      <h2 style="color: #CC7F45;">Tin tức</h2>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-        <li class="breadcrumb-item" style="color: #CC7F45;">Tin tức</li>
-      </ol>
-    </nav>
+      <nav aria-label="breadcrumb" style="display: inline-block;">
+          <h2 style=" color: #CC7F45;">Tin tức</h2>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item" style=" color: #CC7F45;" >Tin tức</li>
+          </ol>
+      </nav>
+      
+      <p-carousel [value]="subCategories" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+          <ng-template let-subCategories pTemplate="item">
+              <a class="m-2 text-center py-3 px-5 category-item">
+                  <div class="mb-1 custom-img">
+                      <img class="" [src]="subCategories.imageUrl" [alt]="subCategories.title">
+                  </div>
+                  <div>
+                      <p class="mb-1 mt-3">{{ subCategories.title }}</p>
+                  </div>
+              </a>
+          </ng-template>
+      </p-carousel>
+  </div>
+</div>
 
-    <!-- Tin tức -->
+  <div class="container" style="padding-top: 50px; text-align: center;">
     <div class="row mt-3">
       <div class="col-12" *ngIf="newsList.length">
         <div class="row">
@@ -25,10 +41,6 @@
               </div>
             </div>
           </div>
-          
-          
-          
-          
         </div>
       </div>
       <div class="col-12" *ngIf="!newsList.length">
@@ -36,4 +48,3 @@
       </div>
     </div>
   </div>
-</div>

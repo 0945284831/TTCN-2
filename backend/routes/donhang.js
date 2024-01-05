@@ -137,6 +137,57 @@ router.post('/update-order-status', async (req, res) => {
   }
 });
 
+
+router.post('/get-orders', async (req, res) => {
+  try {
+    const userId = req.body.userId; // Nhận userId từ request body
+    const orders = await Order.find({ user: userId }).exec();
+    res.json({ success: true, orders });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+router.get('/get-all-orders', async (req, res) => {
+  try {
+    const orders = await Order.find().exec();
+    res.json({ success: true, orders });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+router.get('/revenue-report', async (req, res) => {
+  try {
+    // Thống kê doanh thu theo sản phẩm
+    const revenueByProduct = await Order.aggregate([
+      {
+        $unwind: '$items'
+      },
+      {
+        $group: {
+          _id: '$items.product',
+          totalQuantity: { $sum: '$items.quantity' },
+          totalRevenue: { $sum: { $multiply: ['$items.quantity', '$items.product.productPrice'] } }
+        }
+      }
+    ]);
+
+    // Tính tổng số sản phẩm và tổng tiền
+    const totalProducts = revenueByProduct.length;
+    const totalRevenue = revenueByProduct.reduce((total, item) => total + item.totalRevenue, 0);
+
+    // Trả về kết quả
+    res.json({
+      totalProducts,
+      totalRevenue
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 // router.delete('/don_hang/delete-all', async (req, res) => {
 //   try {
 //     await Order.deleteMany({}); // Xóa tất cả người dùng

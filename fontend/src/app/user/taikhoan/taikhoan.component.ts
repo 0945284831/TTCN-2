@@ -6,6 +6,9 @@ import { UserService } from '../../../assets/service/user.service';
 import { User, ContactInfo } from '../../../assets/service/user.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AddressService } from '../../../assets/service/address.service';
+import { OrderService, Order, OrderResponse, ShippingAddress  } from '../../../assets/service/donhang.service';
+import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-taikhoan',
@@ -13,6 +16,21 @@ import { AddressService } from '../../../assets/service/address.service';
   styleUrls: ['./taikhoan.component.css']
 })
 export class TaikhoanComponent implements OnInit {
+  subCategories = [
+    { title: 'Tô-Chén-Dĩa', imageUrl: '../../../assets/img/danhmuc_1.png' },
+    { title: 'Phụ kiện trà - cà phê', imageUrl: '../../../assets/img/danhmuc_2.png' },
+    { title: 'Ly sứ dưỡng sinh', imageUrl: '../../../assets/img/danhmuc_3.png' },
+    { title: 'Túi vải canvas', imageUrl: '../../../assets/img/danhmuc_4.png' },
+    { title: 'Hộp sứ dưỡng sinh', imageUrl: '../../../assets/img/danhmuc_5.png' },
+    { title: 'Bộ Trà', imageUrl: '../../../assets/img/danhmuc_6.png' },
+ ];
+  responsiveOptions: any[] |  undefined;
+
+  orders: Order[] = [];
+  shippingAddress!: ShippingAddress;
+  showConfirmation: boolean = false;
+  
+  
   userId!: string;
   user!: User;
   contactInfo!: ContactInfo;
@@ -41,11 +59,14 @@ export class TaikhoanComponent implements OnInit {
     private formBuilder: FormBuilder,
     private fb: FormBuilder, 
     private addressService: AddressService,
+    private orderService: OrderService,
+    private confirmationService: ConfirmationService, 
+    private messageService: MessageService,
+    private cdr: ChangeDetectorRef 
   ) {}
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId() || '';
-    console.log('User Id:', this.userId);
 
     // Gọi service để lấy thông tin người dùng
     this.userService.getUser(this.userId).subscribe(
@@ -65,6 +86,24 @@ export class TaikhoanComponent implements OnInit {
       }
     );
 
+    this.responsiveOptions = [
+      {
+          breakpoint: '1199px',
+          numVisible: 1,
+          numScroll: 1
+      },
+      {
+          breakpoint: '991px',
+          numVisible: 2,
+          numScroll: 1
+      },
+      {
+          breakpoint: '767px',
+          numVisible: 1,
+          numScroll: 1
+      }
+  ];  
+
     this.initForm();
     this.loadProvinces();
     // this.addressForm = this.formBuilder.group({
@@ -77,6 +116,69 @@ export class TaikhoanComponent implements OnInit {
     //   zipCode: [''],
     //   isDefault: [''],
     // });
+
+    
+    this.loadOrders();
+  
+  }
+  private loadOrders() {
+    this.orderService.getOrdersByUserId(this.userId).subscribe(
+      (response: OrderResponse) => {
+        this.orders = response.orders;
+      },
+      (error) => {
+        console.error('Error loading orders:', error);
+      }
+    );
+  }
+  getOrderShippingAddress(order: Order): string {
+    // Lấy địa chỉ vận chuyển từ order và định dạng theo ý muốn
+    const shippingAddress = order.shippingAddress[0];
+    return `${shippingAddress.address}, ${shippingAddress.ward}, ${shippingAddress.district}, ${shippingAddress.province}, ${shippingAddress.country}`;
+  }
+  confirm1(order: any) {
+    this.showConfirmation = true;
+
+    this.confirmationService.confirm({
+      
+        message: 'Hủy đơn hàng?',
+        header: 'Xác nhận',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+            this.huyDonHang(order._id);
+            this.showConfirmation = false; // Ẩn cửa sổ sau khi xác nhận
+        },
+        reject: () => {
+            this.showConfirmation = false; // Ẩn cửa sổ sau khi từ chối
+        }
+    });
+}
+
+  huyDonHang(orderId: string): void {
+    const requestData = {
+      userId: this.userId,
+      orderId: orderId,
+    };
+  
+    this.orderService.huyDonHang(requestData).subscribe(
+      (response) => {
+        // Xử lý kết quả nếu cần
+        console.log(response);
+  
+        // Tìm kiếm đơn hàng trong danh sách và cập nhật trạng thái
+        const updatedOrderIndex = this.orders.findIndex(order => order._id === orderId);
+        if (updatedOrderIndex !== -1) {
+          this.orders[updatedOrderIndex].status = 'Hủy';
+          
+          // Cập nhật giao diện
+          this.cdr.detectChanges();
+        }
+      },
+      (error) => {
+        // Xử lý lỗi nếu cần
+        console.error(error);
+      }
+    );
   }
 
   selectedTab: string = 'info'; 

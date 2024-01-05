@@ -5,6 +5,8 @@ import { AuthService } from '../../../assets/service/auth.service';
 import { ShoppingCartService } from '../../../assets/service/giohang.service';
 import { Galleria } from 'primeng/galleria';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
+
 
 @Component({
   selector: 'app-product-details',
@@ -13,8 +15,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ChitietsanphamComponent implements OnInit {
   product!: Product;
+  isProductInStock: boolean = true;
+  
   productImages: any[] = []; // Adjust the type based on your actual data structure
   quantity: number = 1; // Assuming you have a quantity property
+
+  subCategories = [
+    { title: 'Tô-Chén-Dĩa', imageUrl: '../../../assets/img/danhmuc_1.png' },
+    { title: 'Phụ kiện trà - cà phê', imageUrl: '../../../assets/img/danhmuc_2.png' },
+    { title: 'Ly sứ dưỡng sinh', imageUrl: '../../../assets/img/danhmuc_3.png' },
+    { title: 'Túi vải canvas', imageUrl: '../../../assets/img/danhmuc_4.png' },
+    { title: 'Hộp sứ dưỡng sinh', imageUrl: '../../../assets/img/danhmuc_5.png' },
+    { title: 'Bộ Trà', imageUrl: '../../../assets/img/danhmuc_6.png' },
+ ];
+  responsiveOptions: any[] | undefined;
 
 
   activeTab: 'productDescription' | 'purchaseGuide' = 'productDescription';
@@ -23,28 +37,16 @@ export class ChitietsanphamComponent implements OnInit {
     this.activeTab = tab;
   }
   // Adjust the responsive options based on your needs
-  responsiveOptions=[
-    {
-      breakpoint: '1024px',
-      numVisible: 3,
-      numScroll: 3
-    },
-    {
-      breakpoint: '768px',
-      numVisible: 2,
-      numScroll: 2
-    },
-    {
-      breakpoint: '375px',
-      numVisible: 1,
-      numScroll: 1
-    }
-  ];
+  
+ 
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private productService: ProductService,
     private authService: AuthService,
-    private shoppingCartService: ShoppingCartService) {}
+    private shoppingCartService: ShoppingCartService,
+    private confirmationService: ConfirmationService, 
+    private messageService: MessageService ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -52,6 +54,24 @@ export class ChitietsanphamComponent implements OnInit {
       this.getProductDetail(productId);
     });
    
+
+    this.responsiveOptions = [
+      {
+          breakpoint: '1199px',
+          numVisible: 1,
+          numScroll: 1
+      },
+      {
+          breakpoint: '991px',
+          numVisible: 2,
+          numScroll: 1
+      },
+      {
+          breakpoint: '767px',
+          numVisible: 1,
+          numScroll: 1
+      }
+  ];
     
   }
 
@@ -71,6 +91,9 @@ export class ChitietsanphamComponent implements OnInit {
         this.productService.getProductById(productId).subscribe(
           (data) => {
             this.product = data;
+            if (this.product && this.product.productQuantity <= 0) {
+              this.isProductInStock = false;
+            }
           },
           (error) => {
             console.error('Error fetching product detail:', error);
@@ -99,5 +122,28 @@ export class ChitietsanphamComponent implements OnInit {
           console.warn('Product ID, quantity, or user ID is missing. Unable to add to cart.');
           // Handle the case where essential data is missing
         }
+      }
+
+      confirm1(event: Event) {
+        this.confirmationService.confirm({
+          target: event.target as EventTarget,
+          message: 'thêm sản phẩm này vào giỏ hàng?',
+          header: 'Thêm sản phẩm vào giỏ hàng',
+          icon: 'pi pi-shopping-bag',
+          acceptIcon: 'none',
+          rejectIcon: 'none',
+          rejectButtonStyleClass: 'p-button-text',
+          accept: () => {
+            this.addToCart();
+          },
+          reject: () => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Rejected',
+              detail: 'You have rejected',
+              life: 3000
+            });
+          }
+        });
       }
 }

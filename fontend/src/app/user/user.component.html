@@ -116,7 +116,7 @@
         <div class="dropdown-content">
           <ng-container *ngIf="isLoggedIn(); else showLogin">
             <a routerLink="taikhoan">Tài khoản</a>
-            <a (click)="logout()">Đăng xuất</a>
+            <a (click)="logout()" routerLink="/user/home">Đăng xuất</a>
           </ng-container>
           <ng-template #showLogin>
             <!-- Hiển thị khi chưa đăng nhập -->

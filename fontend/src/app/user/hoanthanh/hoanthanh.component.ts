@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsService } from '../../../assets/service/new.service';
 
 @Component({
-  selector: 'app-tintuc',
-  templateUrl: './tintuc.component.html',
-  styleUrls: ['./tintuc.component.css']
+  selector: 'app-hoanthanh',
+  templateUrl: './hoanthanh.component.html',
+  styleUrls: ['./hoanthanh.component.css']
 })
-export class TintucComponent implements OnInit {
-  newsList: any[] = [];
-
- subCategories = [
+export class HoanthanhComponent implements OnInit {
+  
+  subCategories = [
     { title: 'Tô-Chén-Dĩa', imageUrl: '../../../assets/img/danhmuc_1.png' },
     { title: 'Phụ kiện trà - cà phê', imageUrl: '../../../assets/img/danhmuc_2.png' },
     { title: 'Ly sứ dưỡng sinh', imageUrl: '../../../assets/img/danhmuc_3.png' },
@@ -17,20 +15,11 @@ export class TintucComponent implements OnInit {
     { title: 'Hộp sứ dưỡng sinh', imageUrl: '../../../assets/img/danhmuc_5.png' },
     { title: 'Bộ Trà', imageUrl: '../../../assets/img/danhmuc_6.png' },
  ];
-  responsiveOptions: any[] |  undefined;
-
-  constructor(private newsService: NewsService) {}
+  responsiveOptions: any[] | undefined;
+  constructor() {}
 
   ngOnInit(): void {
-    this.newsService.getNews().subscribe(
-      (data) => {
-        console.log('API Response:', data);
-        this.newsList = data;
-      },
-      (error) => {
-        console.error('Error fetching news:', error);
-      }
-    );
+    
 
     this.responsiveOptions = [
       {
@@ -48,5 +37,7 @@ export class TintucComponent implements OnInit {
           numVisible: 1,
           numScroll: 1
       }
-  ];  }
+  ];
+
+  }
 }

@@ -1,3 +1,29 @@
+<div class="header">
+  <div class="container" style="padding-top: 50px; text-align: center;">
+      <nav aria-label="breadcrumb" style="display: inline-block;">
+          <h2 style=" color: #CC7F45;">Chi tiết sản phẩm</h2>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item" style=" color: #CC7F45;" >Chi tiết sản phẩm</li>
+          </ol>
+      </nav>
+      
+      <p-carousel [value]="subCategories" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+          <ng-template let-subCategories pTemplate="item">
+              <a class="m-2 text-center py-3 px-5 category-item">
+                  <div class="mb-1 custom-img">
+                      <img class="" [src]="subCategories.imageUrl" [alt]="subCategories.title">
+                  </div>
+                  <div>
+                      <p class="mb-1 mt-3">{{ subCategories.title }}</p>
+                  </div>
+              </a>
+          </ng-template>
+      </p-carousel>
+  </div>
+</div>
+
+
 <section style="margin: 20px;">
     <div class="container">
       <div class="row">
@@ -14,7 +40,7 @@
             <p>
               Tình trạng:
               <span *ngIf="product.productQuantity > 0; else outOfStock" class="inStock">Còn hàng</span>
-              <ng-template #outOfStock>Hết hàng</ng-template>
+              <ng-template #outOfStock><b style="color: red;">Hết hàng</b></ng-template>
             </p>
             <hr>
             <h2 style="margin-bottom: 20px; color:#CC7F45;">{{ product.productPrice | number:'1.0-2' }} VND</h2>
@@ -34,9 +60,16 @@
                   incrementButtonIcon="pi pi-plus"
                   decrementButtonIcon="pi pi-minus"
                 ></p-inputNumber>
-
-                <button type="button" class="btn" style="background-color: #CC7F45; color: aliceblue;" (click)="addToCart()">Thêm vào giỏ hàng</button>
-
+                <button
+                  (click)="confirm1($event)"
+                  type="button"
+                  class="btn"
+                  style="background-color: #CC7F45; color: aliceblue;"
+                  [disabled]="!isProductInStock"
+                >
+                  Thêm vào giỏ hàng
+                </button>
+                <p-confirmDialog></p-confirmDialog>
             </div>
             
     

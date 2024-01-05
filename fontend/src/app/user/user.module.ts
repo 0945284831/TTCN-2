@@ -38,6 +38,8 @@ import { ChitietdonhangComponent } from './chitietdonhang/chitietdonhang.compone
 import { ThanhtoanComponent } from './thanhtoan/thanhtoan.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { ImageModule } from 'primeng/image';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { HoanthanhComponent } from './hoanthanh/hoanthanh.component';
 
 
 
@@ -58,6 +60,7 @@ import { ImageModule } from 'primeng/image';
     NewDetailComponent,
     ChitietdonhangComponent,
     ThanhtoanComponent,
+    HoanthanhComponent,
   ],
   imports: [
     CommonModule,
@@ -83,7 +86,8 @@ import { ImageModule } from 'primeng/image';
     InputNumberModule,
     BadgeModule,
     SidebarModule,
-    ImageModule 
+    ImageModule,
+    ConfirmDialogModule 
     
    
   ]

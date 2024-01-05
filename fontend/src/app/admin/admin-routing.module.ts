@@ -8,6 +8,7 @@ import { AddProductComponent } from './product/product-add/add-product.component
 import {ProductListComponent} from'./product/product-list/product-list.component';
 import {TintucComponent} from'./tintuc/tintuc.component';
 import {TintucAddComponent} from'./tintuc/tintuc-add/tintuc-add/tintuc-add.component';
+import { DonhangComponent } from './donhang/donhang.component';
 
 const adminRoutes: Routes = [
   {
@@ -20,6 +21,8 @@ const adminRoutes: Routes = [
       { path: 'products/add', component: AddProductComponent, },
       { path: 'tintuc', component: TintucComponent, },
       { path: 'tintuc/add-news', component: TintucAddComponent },
+      { path: 'donhang', component: DonhangComponent },
+
     ]
   }
 ];

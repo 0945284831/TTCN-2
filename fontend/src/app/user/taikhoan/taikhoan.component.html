@@ -1,8 +1,35 @@
+
+<div class="header">
+  <div class="container" style="padding-top: 50px; text-align: center;">
+      <nav aria-label="breadcrumb" style="display: inline-block;">
+          <h2 style=" color: #CC7F45;">Tài Khoản</h2>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item" style=" color: #CC7F45;" >Tài Khoản</li>
+          </ol>
+      </nav>
+      
+      <p-carousel [value]="subCategories" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions">
+          <ng-template let-subCategories pTemplate="item">
+              <a class="m-2 text-center py-3 px-5 category-item">
+                  <div class="mb-1 custom-img">
+                      <img class="" [src]="subCategories.imageUrl" [alt]="subCategories.title">
+                  </div>
+                  <div>
+                      <p class="mb-1 mt-3">{{ subCategories.title }}</p>
+                  </div>
+              </a>
+          </ng-template>
+      </p-carousel>
+  </div>
+</div>
+
+
 <div class="w-75 p-3 mx-auto">
     <div *ngIf="userId">
      
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="vertical-tabs">
             <h2>TRANG TÀI KHOẢN</h2>
             <b>Xin chào,</b><b style="color:red" *ngIf="user"> {{ user.name }} </b><b>!</b>
@@ -20,7 +47,7 @@
           </div>
         </div>
       
-        <div class="col-md-8">
+        <div class="col-md-9">
           <div class="content">
             <!-- Content for the selected tab -->
             <div *ngIf="selectedTab === 'info'">
@@ -32,7 +59,37 @@
             </div>
       
             <div *ngIf="selectedTab === 'orders'">
-              <!-- Content for Đơn hàng của bạn -->
+              <table class="table table-bordered">
+                <thead>
+                  <tr >
+                    <th class="text-center" scope="col" style="background-color: #CC7F45; color: aliceblue;">Đơn hàng</th>
+                    <th class="text-center" scope="col" style="background-color: #CC7F45; color: aliceblue;">Ngày</th>
+                    <th class="text-center" scope="col" style="background-color: #CC7F45; color: aliceblue;">Địa chỉ</th>
+                    <th class="text-center" scope="col" style="background-color: #CC7F45; color: aliceblue;">Giá trị đơn hàng</th>
+                    <th class="text-center" scope="col" style="background-color: #CC7F45; color: aliceblue;">TT thanh toán</th>
+                    <th class="text-center" scope="col" style="background-color: #CC7F45; color: aliceblue;">TT vận chuyển</th>
+                    <th class="text-center" scope="col" style="background-color: #CC7F45; color: aliceblue;">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Loop through orders and display information -->
+                  <tr *ngFor="let order of orders ; let i = index">
+                     <td class="text-center">{{ i + 1 }}</td>
+                    
+                    <td class="text-center" style="white-space: nowrap;">{{ order.createdAt | date:'dd-MM-yyyy' }}</td>
+                    <td class="text-center"> {{ getOrderShippingAddress(order) | json }}</td>
+                    <td class="text-center">{{ order.totalAmount |number:'1.0-2'}} ₫</td>
+                    <td class="text-center">{{ order.paymentMethod }}</td>
+                    <td class="text-center">{{ order.status }}</td>
+                    <td class="text-center">
+                      <button class="btn btn-danger" (click)="confirm1(order)" [disabled]="order.status === 'Giao thành công'">Hủy đơn hàng</button>
+                      
+                    </td>
+                    <p-confirmDialog></p-confirmDialog>
+                  </tr>
+                  
+                </tbody>
+              </table>
             </div>
       
             <div *ngIf="selectedTab === 'address'">
@@ -89,12 +146,6 @@
           </select>
         </div>
       </div>
-      
-      
-      
-      
-      
-    
       <div class="row">
         <div class="col-md-12 mt-3">
           <input type="text" id="zipCode" formControlName="zipCode" [(ngModel)]="contactInfo.zipCode" class="form-control" placeholder="Mã zip">

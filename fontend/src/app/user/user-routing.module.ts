@@ -16,6 +16,8 @@ import { TintucComponent } from './tintuc/tintuc.component'
 import { NewDetailComponent } from './tintuc/new-detail/new-detail.component'; 
 import { ChitietdonhangComponent } from './chitietdonhang/chitietdonhang.component';
 import { ThanhtoanComponent } from './thanhtoan/thanhtoan.component';
+import { HoanthanhComponent } from './hoanthanh/hoanthanh.component';
+
 
 const userRoutes: Routes = [
   {
@@ -40,6 +42,7 @@ const userRoutes: Routes = [
       { path: 'chitietsanpham/:id', component: ChitietsanphamComponent },
       { path: 'chitietdonhang', component: ChitietdonhangComponent },
       { path: 'thanhtoan', component: ThanhtoanComponent },
+      { path: 'hoanthanh', component: HoanthanhComponent },
 
     ]
   }

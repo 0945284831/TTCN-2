@@ -6,6 +6,7 @@ import { ShoppingCartService } from '../../../assets/service/giohang.service';
 import { Galleria } from 'primeng/galleria';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MessageService, ConfirmEventType } from 'primeng/api';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -46,7 +47,8 @@ export class ChitietsanphamComponent implements OnInit {
     private authService: AuthService,
     private shoppingCartService: ShoppingCartService,
     private confirmationService: ConfirmationService, 
-    private messageService: MessageService ) {}
+    private messageService: MessageService,
+    private router: Router ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -101,28 +103,29 @@ export class ChitietsanphamComponent implements OnInit {
         );
       }
 
-    addToCart(): void {
+      addToCart(): void {
         const productId = this.product._id;
         const quantity = this.quantity;
         const userId = this.authService.getUserId();
         this.shoppingCartService.updateTotalQuantity();
-      
+    
         if (productId && quantity && userId) {
-          this.shoppingCartService.addToCart(userId, productId, quantity).subscribe(
-            (shoppingCart) => {
-              console.log('Product added to the shopping cart:', shoppingCart);
-              // You can perform additional actions if needed
-            },
-            (error) => {
-              console.error('Error adding product to the shopping cart:', error);
-              // Handle error as needed
-            }
-          );
+            this.shoppingCartService.addToCart(userId, productId, quantity).subscribe(
+                (shoppingCart) => {
+                    console.log('Product added to the shopping cart:', shoppingCart);
+                    // You can perform additional actions if needed
+                },
+                (error) => {
+                    console.error('Error adding product to the shopping cart:', error);
+                    // Handle error as needed
+                }
+            );
         } else {
-          console.warn('Product ID, quantity, or user ID is missing. Unable to add to cart.');
-          // Handle the case where essential data is missing
+            console.warn('Product ID, quantity, or user ID is missing. Unable to add to cart.');
+            // If userId is missing, navigate to the login page
+            this.router.navigate(['/user/dangnhap']);
         }
-      }
+}
 
       confirm1(event: Event) {
         this.confirmationService.confirm({
